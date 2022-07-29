@@ -1,0 +1,11 @@
+C:\Users\Developer\VS2022\C# lessons\Tasks\RotatingQuadrilateral\bin\Debug\RotatingQuadrilateral.exe.config
+C:\Users\Developer\VS2022\C# lessons\Tasks\RotatingQuadrilateral\bin\Debug\RotatingQuadrilateral.exe
+C:\Users\Developer\VS2022\C# lessons\Tasks\RotatingQuadrilateral\bin\Debug\RotatingQuadrilateral.pdb
+C:\Users\Developer\VS2022\C# lessons\Tasks\RotatingQuadrilateral\obj\Debug\RotatingQuadrilateral.csproj.AssemblyReference.cache
+C:\Users\Developer\VS2022\C# lessons\Tasks\RotatingQuadrilateral\obj\Debug\RotatingQuadrilateral.csproj.SuggestedBindingRedirects.cache
+C:\Users\Developer\VS2022\C# lessons\Tasks\RotatingQuadrilateral\obj\Debug\RotatingQuadrilateral.Form1.resources
+C:\Users\Developer\VS2022\C# lessons\Tasks\RotatingQuadrilateral\obj\Debug\RotatingQuadrilateral.Properties.Resources.resources
+C:\Users\Developer\VS2022\C# lessons\Tasks\RotatingQuadrilateral\obj\Debug\RotatingQuadrilateral.csproj.GenerateResource.cache
+C:\Users\Developer\VS2022\C# lessons\Tasks\RotatingQuadrilateral\obj\Debug\RotatingQuadrilateral.csproj.CoreCompileInputs.cache
+C:\Users\Developer\VS2022\C# lessons\Tasks\RotatingQuadrilateral\obj\Debug\RotatingQuadrilateral.exe
+C:\Users\Developer\VS2022\C# lessons\Tasks\RotatingQuadrilateral\obj\Debug\RotatingQuadrilateral.pdb
