@@ -1,5 +1,5 @@
 ﻿using PeopleAccounting.Staff;
-using PeopleAccounting.Staff.Status;
+using PeopleAccounting.Staff.Post;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +15,7 @@ namespace PeopleAccounting
         public List<Employee> employees = new List<Employee>();
 
         #region Methods
-        public void Start()
+        public void Start() 
         {
             while (true)
             {
@@ -31,7 +31,7 @@ namespace PeopleAccounting
                         Console.WriteLine("\nAdding student...");
                         Student student = new Student();
 
-                        FillHuman(student);
+                        FillBaseInfo(student);
 
                         if (YesNoQuestion("\nIs taking optional classes? y/n"))
                             student.OptionalClasses = GetConsoleString("Optional classes: ");
@@ -48,7 +48,7 @@ namespace PeopleAccounting
                         Console.WriteLine("\nAdding teacher...");
                         Teacher teacher = new Teacher();
 
-                        FillHuman(teacher);
+                        FillBaseInfo(teacher);
 
                         if (YesNoQuestion("\nIs taking optional classes? y/n"))
                             teacher.OptionalClasses = GetConsoleString("Optional classes: ");
@@ -65,7 +65,7 @@ namespace PeopleAccounting
                         Console.WriteLine("\nAdding employee...");
                         Employee employee = new Employee();
 
-                        FillHuman(employee);
+                        FillBaseInfo(employee);
 
                         employees.Add(employee);
                         Console.WriteLine($"Added human: \n\tFirst name: {employee.FirstName}, " +
@@ -81,13 +81,15 @@ namespace PeopleAccounting
             Console.ReadKey(true);
         }
 
-        public static Human FillHuman(Human human)
+        public static Human FillBaseInfo(Human human)
         {
             human.SetFullName(GetConsoleString("First name: "), GetConsoleString("Last name: "));
             human.DateOfBirth = GetConsoleString("Date of birth: ");
 
             return human;
         }
+
+        //public void AddStudent() { }
 
         private static bool YesNoQuestion(string question)
         {

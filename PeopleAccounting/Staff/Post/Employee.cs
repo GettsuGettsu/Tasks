@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PeopleAccounting.Staff.Status
+namespace PeopleAccounting.Staff.Post
 {
     public class Employee : Human
     {

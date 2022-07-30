@@ -13,40 +13,45 @@ namespace RotatingQuadrilateral
     public partial class Form1 : Form
     {        
         static readonly Pen pen = new Pen(Color.Black, 2);
+        private Graphics g;
 
         public Form1()
         {
             InitializeComponent();
+
+            g = this.CreateGraphics();
+
             this.Paint += Form1_Paint;
             this.MouseClick += Form1_MouseClick;
+            this.Resize += Form1_Resize;
+        }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            Draw(this.CreateGraphics());
         }
 
         private void Form1_MouseClick(object sender, MouseEventArgs e)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            Draw();
+            Draw(g);
         }
 
-        public void Draw()
+        public void Draw(Graphics g)
         {            
             int xStart = this.Width / 3;
-            int yStart = this.Height / 3;            
-            
-            Graphics line1 = this.CreateGraphics();
-            Graphics line2 = this.CreateGraphics();
-            Graphics line3 = this.CreateGraphics();
-            Graphics line4 = this.CreateGraphics();
+            int yStart = this.Height / 3;
 
-            line1.Clear(Form1.DefaultBackColor);
+            g.Clear(Form1.DefaultBackColor);
 
-            line1.DrawLine(pen, xStart, yStart, xStart + 90, yStart - 15);
-            line2.DrawLine(pen, xStart + 90, yStart - 15, xStart + 100, yStart + 40);
-            line3.DrawLine(pen, xStart + 100, yStart + 40, xStart + 50, yStart + 65);
-            line4.DrawLine(pen, xStart + 50, yStart + 65, xStart, yStart);
+            g.DrawLine(pen, xStart, yStart, xStart + 90, yStart - 15);
+            g.DrawLine(pen, xStart + 90, yStart - 15, xStart + 100, yStart + 40);
+            g.DrawLine(pen, xStart + 100, yStart + 40, xStart + 50, yStart + 65);
+            g.DrawLine(pen, xStart + 50, yStart + 65, xStart, yStart);
         }
     }
 }
