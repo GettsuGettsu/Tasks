@@ -18,16 +18,8 @@ namespace PeopleAccounting.People
         #endregion
 
         #region Properties
-        public string FirstName
-        {
-            get => firstName;
-            set => firstName = value;
-        }
-        public string LastName 
-        {
-            get => lastName;
-            set => lastName = value;
-        }
+        public string FirstName => firstName;
+        public string LastName => lastName;
         public string DateOfBirth 
         {
             get => dateOfBirth;
@@ -41,6 +33,11 @@ namespace PeopleAccounting.People
         #endregion
 
         #region Methods
+        public void SetFullName(string firstName, string lastName)
+        {
+            this.firstName = firstName;
+            this.lastName = lastName;
+        }
         #endregion
 
         public Humans() { }

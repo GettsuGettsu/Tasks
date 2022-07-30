@@ -15,5 +15,20 @@ namespace PeopleAccounting.People.Status
 
         #region Methods
         #endregion
+
+        public Employees() { }
+
+        public Employees(string firstName, string lastName)
+        {
+            this.firstName = firstName;
+            this.lastName = lastName;
+        }
+
+        public Employees(string firstName, string lastName, string dateOfBirth)
+        {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.dateOfBirth = dateOfBirth;
+        }
     }
 }

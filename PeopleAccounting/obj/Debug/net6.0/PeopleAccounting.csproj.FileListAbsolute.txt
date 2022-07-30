@@ -1,0 +1,15 @@
+C:\Users\Developer\VS2022\C# lessons\Tasks\PeopleAccounting\bin\Debug\net6.0\PeopleAccounting.exe
+C:\Users\Developer\VS2022\C# lessons\Tasks\PeopleAccounting\bin\Debug\net6.0\PeopleAccounting.deps.json
+C:\Users\Developer\VS2022\C# lessons\Tasks\PeopleAccounting\bin\Debug\net6.0\PeopleAccounting.runtimeconfig.json
+C:\Users\Developer\VS2022\C# lessons\Tasks\PeopleAccounting\bin\Debug\net6.0\PeopleAccounting.dll
+C:\Users\Developer\VS2022\C# lessons\Tasks\PeopleAccounting\bin\Debug\net6.0\PeopleAccounting.pdb
+C:\Users\Developer\VS2022\C# lessons\Tasks\PeopleAccounting\obj\Debug\net6.0\PeopleAccounting.csproj.AssemblyReference.cache
+C:\Users\Developer\VS2022\C# lessons\Tasks\PeopleAccounting\obj\Debug\net6.0\PeopleAccounting.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Developer\VS2022\C# lessons\Tasks\PeopleAccounting\obj\Debug\net6.0\PeopleAccounting.AssemblyInfoInputs.cache
+C:\Users\Developer\VS2022\C# lessons\Tasks\PeopleAccounting\obj\Debug\net6.0\PeopleAccounting.AssemblyInfo.cs
+C:\Users\Developer\VS2022\C# lessons\Tasks\PeopleAccounting\obj\Debug\net6.0\PeopleAccounting.csproj.CoreCompileInputs.cache
+C:\Users\Developer\VS2022\C# lessons\Tasks\PeopleAccounting\obj\Debug\net6.0\PeopleAccounting.dll
+C:\Users\Developer\VS2022\C# lessons\Tasks\PeopleAccounting\obj\Debug\net6.0\refint\PeopleAccounting.dll
+C:\Users\Developer\VS2022\C# lessons\Tasks\PeopleAccounting\obj\Debug\net6.0\PeopleAccounting.pdb
+C:\Users\Developer\VS2022\C# lessons\Tasks\PeopleAccounting\obj\Debug\net6.0\PeopleAccounting.genruntimeconfig.cache
+C:\Users\Developer\VS2022\C# lessons\Tasks\PeopleAccounting\obj\Debug\net6.0\ref\PeopleAccounting.dll
