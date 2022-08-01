@@ -12,9 +12,6 @@ namespace PeopleAccounting.Staff.Post
         #endregion
 
         #region Properties
-        public bool IsFormalForm => isFormalForm = true;
-
-
         private string optionalClasses = "None";
         public string OptionalClasses
         {
@@ -30,6 +27,23 @@ namespace PeopleAccounting.Staff.Post
         #endregion
 
         #region Methods
+        public static Student CreateStudent(string firstName, string lastName, string dateOfBirth, string optionalClasses, bool isOnVacation)
+        {
+            Student student = new Student();
+
+            student.FillBaseInfo(firstName, lastName, dateOfBirth);
+            student.OptionalClasses = Student.HaveOptionalClasses(optionalClasses);
+
+            return student;
+        }
+
+        public static string HaveOptionalClasses(string optionalClasses)
+        {
+            if (!String.IsNullOrEmpty(optionalClasses))
+                return optionalClasses;
+
+            return "None";
+        }
         #endregion
 
         public Student() { }

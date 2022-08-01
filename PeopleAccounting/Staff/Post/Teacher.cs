@@ -8,10 +8,10 @@ namespace PeopleAccounting.Staff.Post
 {
     public class Teacher : Employee
     {
+        #region Fields
+        #endregion
+
         #region Properties
-        public new bool IsFormalForm { get; } = false;
-
-
         private string optionalClasses = "None";
         public string OptionalClasses
         {
@@ -27,8 +27,19 @@ namespace PeopleAccounting.Staff.Post
         #endregion
 
         #region Methods
+        public static string HaveOptionalClasses(string optionalClasses)
+        {
+            if (!String.IsNullOrEmpty(optionalClasses))
+                return optionalClasses;
+
+            return "None";
+        }
         #endregion
 
-        public Teacher() { }
+        public Teacher() 
+        {            
+            isFormalForm = false;
+            isTeacher = true;
+        }
     }
 }

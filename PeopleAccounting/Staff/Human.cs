@@ -9,19 +9,22 @@ namespace PeopleAccounting.Staff
     public class Human
     {
         #region Fields
-        protected bool isFormalForm;
         #endregion
 
         #region Properties
-        protected string firstName = "Undefined";
+        protected bool isFormalForm = true;
+        public bool IsFormalForm { get; }
+
+
+        protected string firstName = "Not set";
         public string FirstName { get; }
 
         
-        protected string lastName = "Undefined";
+        protected string lastName = "Not set";
         public string LastName { get; }
 
         
-        protected string dateOfBirth = "Undefined";
+        protected string dateOfBirth = "Not set";
         public string DateOfBirth { get; set; }
 
 
@@ -30,10 +33,27 @@ namespace PeopleAccounting.Staff
         #endregion
 
         #region Methods
-        public void SetFullName(string firstName, string lastName)
+        public static string[] GetBaseInfo()
+        {
+            string[] baseInfo = new string[3];
+
+            Console.WriteLine("\nEnter first name: ");
+            baseInfo[0] = University.GetConsoleString();
+
+            Console.WriteLine("\nEnter last name: ");
+            baseInfo[1] = University.GetConsoleString();
+
+            Console.WriteLine("\nEnter date of birth: ");
+            baseInfo[2] = University.GetConsoleString();
+
+            return baseInfo;
+        }
+
+        public void FillBaseInfo(string firstName, string lastName, string dateOfBirth)
         {
             this.firstName = firstName;
             this.lastName = lastName;
+            this.dateOfBirth = dateOfBirth;
         }
         #endregion
 
