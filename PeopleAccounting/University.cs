@@ -20,71 +20,91 @@ namespace PeopleAccounting
         {
             while (true)
             {
-                if (!YesNoQuestion("Add human? y/n"))
+                if (!UniversityHelper.YesNoQuestion("Add human? y/n"))
                     break;
 
                 Console.WriteLine("\n1 - Add student,\n2 - add teacher,\n3 - add employee.");
-                char readChar = ReadChar();
+                char readChar = UniversityHelper.ReadChar();
 
-                string[] baseInfo = new string[3];
                 string optionalClasses = "None";
 
                 switch (readChar)
                 {
                     case '1':
-                        Console.WriteLine("\nAdding student...");
-
-                        baseInfo = Human.GetBaseInfo();
-
-                        if (YesNoQuestion("\nIs taking optional classes? y/n"))
                         {
-                            Console.WriteLine("Optional classes: ");
-                            optionalClasses = GetConsoleString();
+                            this.AddingEducationalHuman(false);
+
+                            Student student = students.LastOrDefault();
+
+                            Console.WriteLine($"Succsess!\n\tFirst name: {student.FirstName}, " +
+                                $"last name: {student.LastName}, date of birth: {student.DateOfBirth}, " +
+                                $"optional classes: {student.OptionalClasses}");
+
+                            break;
                         }
 
-                        AddStudent(baseInfo[0], baseInfo[1], baseInfo[2], optionalClasses, false);
-
-                        Console.WriteLine($"Succsess!\n\tFirst name: {student.FirstName}, " +
-                            $"last name: {student.LastName}, date of birth: {student.DateOfBirth}, " +
-                            $"optional classes: {student.OptionalClasses}");
-
-                        break;
-
                     case '2':
-                        Console.WriteLine("\nAdding teacher...");
-                        Teacher teacher = new Teacher();
+                        {
+                            this.AddingEducationalHuman(true);
 
-                        FillBaseInfo(teacher);
+                            Teacher teacher = (Teacher)staff.LastOrDefault();
 
-                        if (YesNoQuestion("\nIs taking optional classes? y/n"))
-                            teacher.OptionalClasses = GetConsoleString("Optional classes: ");
-                        else teacher.OptionalClasses = "None";
+                            Console.WriteLine($"Added human: \n\tFirst name: {teacher.FirstName}, " +
+                                $"last name: {teacher.LastName}, date of birth: {teacher.DateOfBirth}, " +
+                                $"optional classes: {teacher.OptionalClasses}");
 
-                        staff.Add(teacher);
-                        Console.WriteLine($"Added human: \n\tFirst name: {teacher.FirstName}, " +
-                            $"last name: {teacher.LastName}, date of birth: {teacher.DateOfBirth}, " +
-                            $"optional classes: {teacher.OptionalClasses}");
-
-                        break;
-
+                            break;
+                        }
                     case '3':
-                        Console.WriteLine("\nAdding employee...");
-                        Employee employee = new Employee();
+                        {
+                            Console.WriteLine("\nAdding employee...");
+                            Employee employee = new Employee();
 
-                        employee.FillBaseInfo(employee);
+                            employee.FillBaseInfo(employee);
 
-                        staff.Add(employee);
-                        Console.WriteLine($"Added human: \n\tFirst name: {employee.FirstName}, " +
-                            $"last name: {employee.LastName}, date of birth: {employee.DateOfBirth}");
+                            staff.Add(employee);
+                            Console.WriteLine($"Added human: \n\tFirst name: {employee.FirstName}, " +
+                                $"last name: {employee.LastName}, date of birth: {employee.DateOfBirth}");
 
-                        break;
-
-                    default:
-                        break;
+                            break;
+                        }
+                    default: break;
                 }
             }
             Console.Write("Press any key to exit...");
             Console.ReadKey(true);
+        }
+
+        private void AddingEducationalHuman(bool isTeacher)
+        {            
+            Console.WriteLine("\nAdding student...");
+
+            string[] baseInfo = Human.GetBaseInfo();
+            string optionalClasses = "None";
+
+            if (UniversityHelper.YesNoQuestion("\nIs taking optional classes? y/n"))
+            {
+                Console.WriteLine("Optional classes: ");
+                optionalClasses = UniversityHelper.GetConsoleString();
+            }
+
+            if (isTeacher)
+            {
+                Console.WriteLine("\nSalary: ");
+                double.TryParse(Console.ReadLine(), out double salary);
+                AddEmployee(baseInfo[0], baseInfo[1], baseInfo[2], salary, true, false, optionalClasses);
+            }
+            else AddStudent(baseInfo[0], baseInfo[1], baseInfo[2], optionalClasses, false);
+        }
+
+        private void AddingEmployee()
+        {
+            Console.WriteLine("\nAdding teacher...");
+
+            string[] baseInfo = Human.GetBaseInfo();
+                        
+
+            AddEmployee();
         }
 
         public void AddEmployee(Employee employee)
@@ -97,7 +117,7 @@ namespace PeopleAccounting
             staff.Add(Employee.CreateEmployee(human, salary, isTeacher, optionalClasses));
         }
 
-        public void AddEmpoyee(string firstName, string lastName, string dateOfBirth, double salary, bool isOnVacation, bool isTeacher, string optionalClasses = "None")
+        public void AddEmployee(string firstName, string lastName, string dateOfBirth, double salary, bool isTeacher, bool isOnVacation = false, string optionalClasses = "None")
         {
             staff.Add(Employee.CreateEmployee(firstName, lastName, dateOfBirth, salary, isOnVacation, isTeacher, optionalClasses));
         }
@@ -120,44 +140,7 @@ namespace PeopleAccounting
         public void RemoveStudent(Student student)
         {
             students.Remove(student);
-        }        
-
-        private bool YesNoQuestion(string question)
-        {
-            Console.WriteLine(question);
-
-            char readChar = ReadChar();
-
-            if (readChar == 'n')
-            {
-                return false;
-            }
-            else if (readChar != 'y')
-            {
-                Console.WriteLine("\nWrong character!");
-                YesNoQuestion(question);
-            }
-
-            return true;
-        }
-
-        internal static char ReadChar()
-        {
-            return Console.ReadKey(true).KeyChar;
-        }
-
-        internal static string GetConsoleString()
-        {
-            string? inputText = Console.ReadLine();
-
-            if (String.IsNullOrEmpty(inputText) || String.IsNullOrWhiteSpace(inputText))
-            {
-                Console.WriteLine("\nWrong input!");
-                GetConsoleString();
-            }
-
-            return inputText;
-        }
+        }      
         #endregion
 
         public University() { }

@@ -27,7 +27,7 @@ namespace PeopleAccounting.Staff.Post
         #endregion
 
         #region Methods
-        public static string HaveOptionalClasses(string optionalClasses)
+        public static string OptionalClassesValidator(string optionalClasses)
         {
             if (!String.IsNullOrEmpty(optionalClasses))
                 return optionalClasses;

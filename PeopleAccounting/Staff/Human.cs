@@ -38,13 +38,13 @@ namespace PeopleAccounting.Staff
             string[] baseInfo = new string[3];
 
             Console.WriteLine("\nEnter first name: ");
-            baseInfo[0] = University.GetConsoleString();
+            baseInfo[0] = UniversityHelper.GetConsoleString();
 
             Console.WriteLine("\nEnter last name: ");
-            baseInfo[1] = University.GetConsoleString();
+            baseInfo[1] = UniversityHelper.GetConsoleString();
 
             Console.WriteLine("\nEnter date of birth: ");
-            baseInfo[2] = University.GetConsoleString();
+            baseInfo[2] = UniversityHelper.GetConsoleString();
 
             return baseInfo;
         }

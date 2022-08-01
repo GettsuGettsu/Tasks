@@ -32,12 +32,12 @@ namespace PeopleAccounting.Staff.Post
             Student student = new Student();
 
             student.FillBaseInfo(firstName, lastName, dateOfBirth);
-            student.OptionalClasses = Student.HaveOptionalClasses(optionalClasses);
+            student.OptionalClasses = Student.OptionalClassesValidator(optionalClasses);
 
             return student;
         }
 
-        public static string HaveOptionalClasses(string optionalClasses)
+        public static string OptionalClassesValidator(string optionalClasses)
         {
             if (!String.IsNullOrEmpty(optionalClasses))
                 return optionalClasses;

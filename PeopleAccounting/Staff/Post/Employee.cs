@@ -54,7 +54,7 @@ namespace PeopleAccounting.Staff.Post
             if (isTeacher)
             {
                 Teacher teacher = (Teacher)employee;                
-                teacher.OptionalClasses = Teacher.HaveOptionalClasses(optionalClasses);
+                teacher.OptionalClasses = Teacher.OptionalClassesValidator(optionalClasses);
                 return teacher;
             }
 
