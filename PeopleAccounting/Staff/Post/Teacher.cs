@@ -15,14 +15,8 @@ namespace PeopleAccounting.Staff.Post
         private string optionalClasses = "None";
         public string OptionalClasses
         {
-            get
-            {
-                return optionalClasses;
-            }
-            set
-            {
-                optionalClasses = value;
-            }
+            get { return optionalClasses; }
+            set { optionalClasses = value; }
         }
         #endregion
 

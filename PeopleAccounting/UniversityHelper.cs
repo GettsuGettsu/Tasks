@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PeopleAccounting.Staff.Post;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,11 +20,16 @@ namespace PeopleAccounting
 
             if (String.IsNullOrEmpty(inputText) || String.IsNullOrWhiteSpace(inputText))
             {
-                Console.WriteLine("\nWrong input!");
+                ErrorMessage();
                 GetConsoleString();
             }
 
             return inputText;
+        }
+
+        internal static void ErrorMessage()
+        {
+            Console.WriteLine("\nWrong input!");
         }
 
         internal static bool YesNoQuestion(string question)
@@ -32,17 +38,27 @@ namespace PeopleAccounting
 
             char readChar = UniversityHelper.ReadChar();
 
-            if (readChar == 'n')
+            if (readChar == 'n' || readChar == 'N')
             {
                 return false;
             }
-            else if (readChar != 'y')
+            else if (readChar != 'y' && readChar != 'Y')
             {
                 Console.WriteLine("\nWrong character!");
                 YesNoQuestion(question);
             }
 
             return true;
+        }
+
+        internal static void WriteAllProp<T>(T human)
+        {
+            Console.WriteLine("\nAdded:");
+            foreach (var prop in typeof(T).GetProperties())
+            {
+                Console.WriteLine($"\t{prop.Name}: {prop.GetValue(human)}");
+            }
+            Console.WriteLine();
         }
     }
 }

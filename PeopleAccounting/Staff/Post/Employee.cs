@@ -14,13 +14,32 @@ namespace PeopleAccounting.Staff.Post
 
         #region Properties
         private double salary = 0.0;
-        public double Salary { get; set; }
+        public double Salary
+        {
+            get { return salary; }
+            set { salary = value; }
+        }
 
         protected bool isTeacher = false;
-        public bool IsTeacher { get; }
+        public bool IsTeacher
+        {
+            get { return isTeacher; }
+        }
         #endregion
 
         #region Methods
+        public static double GetSalary()
+        {
+            Console.Write("Salary: ");
+
+            if (!double.TryParse(Console.ReadLine(), out double salary) || salary < 0)
+            {
+                UniversityHelper.ErrorMessage();
+                GetSalary();
+            }
+
+            return salary;
+        }
 
         public static Employee CreateEmployee(Human human, double salary, bool isTeacher, string optionalClasses)
         {
@@ -52,13 +71,23 @@ namespace PeopleAccounting.Staff.Post
             employee.IsOnVacation = isOnVacation;
 
             if (isTeacher)
-            {
-                Teacher teacher = (Teacher)employee;                
-                teacher.OptionalClasses = Teacher.OptionalClassesValidator(optionalClasses);
+            {                       
+                Teacher teacher = CreateTeacher(firstName, lastName, dateOfBirth, salary, isOnVacation, Teacher.OptionalClassesValidator(optionalClasses));
                 return teacher;
             }
 
             return employee;
+        }
+
+        private static Teacher CreateTeacher(string firstName, string lastName, string dateOfBirth, double salary, bool isOnVacation, string optionalClasses)
+        {
+            Teacher teacher = new Teacher();
+            teacher.FillBaseInfo(firstName, lastName, dateOfBirth);
+            teacher.Salary = salary;
+            teacher.IsOnVacation = isOnVacation;
+            teacher.OptionalClasses = optionalClasses;
+
+            return teacher;
         }
         #endregion
 

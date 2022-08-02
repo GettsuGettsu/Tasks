@@ -13,23 +13,39 @@ namespace PeopleAccounting.Staff
 
         #region Properties
         protected bool isFormalForm = true;
-        public bool IsFormalForm { get; }
+        public bool IsFormalForm 
+        {
+            get { return isFormalForm; }
+        }
 
 
         protected string firstName = "Not set";
-        public string FirstName { get; }
+        public string FirstName 
+        { 
+            get { return firstName; }
+        }
 
         
         protected string lastName = "Not set";
-        public string LastName { get; }
+        public string LastName 
+        { 
+            get { return lastName; }
+        }
 
         
         protected string dateOfBirth = "Not set";
-        public string DateOfBirth { get; set; }
-
+        public string DateOfBirth
+        {
+            get { return dateOfBirth; }
+            set { dateOfBirth = value; }
+        }
 
         protected bool isOnVacation = false;
-        public bool IsOnVacation { get; set; }
+        public bool IsOnVacation
+        {
+            get { return isOnVacation; }
+            set { isOnVacation = value; }
+        }
         #endregion
 
         #region Methods
@@ -37,13 +53,13 @@ namespace PeopleAccounting.Staff
         {
             string[] baseInfo = new string[3];
 
-            Console.WriteLine("\nEnter first name: ");
+            Console.Write("\nEnter first name: ");
             baseInfo[0] = UniversityHelper.GetConsoleString();
 
-            Console.WriteLine("\nEnter last name: ");
+            Console.Write("Enter last name: ");
             baseInfo[1] = UniversityHelper.GetConsoleString();
 
-            Console.WriteLine("\nEnter date of birth: ");
+            Console.Write("Enter date of birth: ");
             baseInfo[2] = UniversityHelper.GetConsoleString();
 
             return baseInfo;

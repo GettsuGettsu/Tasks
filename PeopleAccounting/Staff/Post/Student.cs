@@ -15,14 +15,8 @@ namespace PeopleAccounting.Staff.Post
         private string optionalClasses = "None";
         public string OptionalClasses
         {
-            get
-            {
-                return optionalClasses;
-            }
-            set
-            {
-                optionalClasses = value;
-            }
+            get { return optionalClasses; }
+            set { optionalClasses = value; }
         }
         #endregion
 
@@ -43,6 +37,11 @@ namespace PeopleAccounting.Staff.Post
                 return optionalClasses;
 
             return "None";
+        }
+
+        public void DropOut()
+        {
+            University.RemoveStudent(this);
         }
         #endregion
 
