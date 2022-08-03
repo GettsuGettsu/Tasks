@@ -12,7 +12,7 @@ namespace RotatingQuadrilateral
 {
     public partial class Form1 : Form
     {
-        private BackgroundWorker backgroundWorker1;
+        private BackgroundWorker backgroundWorker1 = new BackgroundWorker();
         private Label label1 = new Label();
         private Button button1 = new Button();
 
@@ -24,10 +24,10 @@ namespace RotatingQuadrilateral
         private PointF pointD;
 
         private float radius;
-        private float angle1 = 7;
-        private float angle2 = 107;
-        private float angle3 = 190;
-        private float angle4 = 208;
+        private float angle1 = 13;
+        private float angle2 = 150;
+        private float angle3 = 197;
+        private float angle4 = 266;
         private float rotationAngle = 2.5f;
 
         private bool startRotate = true;
@@ -43,14 +43,13 @@ namespace RotatingQuadrilateral
             label1.Width = TextRenderer.MeasureText(label1.Text, label1.Font).Width + 3;
             label1.Location = new Point((this.Width - label1.Width) / 2, 5);
 
-            button1.Text = "Change direcrion";
+            button1.Text = "Change direction";
             button1.Font = new Font("Arial", 8f);
             button1.Width = TextRenderer.MeasureText(button1.Text, button1.Font).Width + 13;
             button1.Height = TextRenderer.MeasureText(button1.Text, button1.Font).Height + 13;
             button1.Location = new Point(5, this.Height - button1.Height - 45);
             button1.Click += Button1_Click;
-
-            backgroundWorker1 = new BackgroundWorker();
+                        
             backgroundWorker1.WorkerSupportsCancellation = true;
             backgroundWorker1.DoWork += BackgroundWorker1_DoWork;
 
@@ -60,6 +59,8 @@ namespace RotatingQuadrilateral
             this.Paint += Form1_Paint;
             this.Resize += Form1_Resize;
             this.MouseClick += Form1_MouseClick;
+
+            // flicker fix; not working??
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.DoubleBuffer, true);
 
             this.Controls.Add(label1);
