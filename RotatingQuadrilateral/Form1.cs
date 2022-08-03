@@ -23,12 +23,12 @@ namespace RotatingQuadrilateral
         private PointF pointC;
         private PointF pointD;
 
-        private readonly float radius = 50;
+        private float radius;
         private float angle1 = 7;
         private float angle2 = 107;
         private float angle3 = 190;
         private float angle4 = 208;
-        private float rotationAngle = 2;
+        private float rotationAngle = 2.5f;
 
         private bool startRotate = true;
 
@@ -137,6 +137,8 @@ namespace RotatingQuadrilateral
 
         private bool InitializePoints(float angle1, float angle2, float angle3, float angle4)
         {
+            radius = this.Width > this.Height ? this.Height / 5 : this.Width / 5;
+
             circleTopLeft = new PointF(this.Width / 2 - radius, this.Height / 2 - radius);
             circleCenter = new PointF(circleTopLeft.X + radius, circleTopLeft.Y + radius);
 
