@@ -44,7 +44,7 @@ namespace RotatingQuadrilateral
             label1.Location = new Point((this.Width - label1.Width) / 2, 5);
 
             button1.Text = "Change direcrion";
-            button1.Font = new Font("Arial", 10f);
+            button1.Font = new Font("Arial", 8f);
             button1.Width = TextRenderer.MeasureText(button1.Text, button1.Font).Width + 13;
             button1.Height = TextRenderer.MeasureText(button1.Text, button1.Font).Height + 13;
             button1.Location = new Point(5, this.Height - button1.Height - 45);
@@ -56,6 +56,7 @@ namespace RotatingQuadrilateral
 
             InitializePoints(angle1, angle2, angle3, angle4);
                         
+            this.MinimumSize = new Size(label1.Width + 23, label1.Height + button1.Height + 170);
             this.Paint += Form1_Paint;
             this.Resize += Form1_Resize;
             this.MouseClick += Form1_MouseClick;
