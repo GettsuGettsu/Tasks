@@ -38,6 +38,8 @@ namespace RotatingQuadrilateral
         {
             InitializeComponent();
 
+            radius = CalcRadius(this.Height, this.Width);
+
             label1.Text = "Click on form to start/stop rotating.";
             label1.Font = new Font("Arial", 14f);
             label1.Width = TextRenderer.MeasureText(label1.Text, label1.Font).Width + 3;
@@ -56,7 +58,6 @@ namespace RotatingQuadrilateral
             InitializePoints(angle1, angle2, angle3, angle4);
                         
             this.MinimumSize = new Size(label1.Width + 23, label1.Height + button1.Height + 170);
-            this.Paint += Form1_Paint;
             this.Resize += Form1_Resize;
             this.MouseClick += Form1_MouseClick;
 
@@ -74,38 +75,17 @@ namespace RotatingQuadrilateral
 
         private void BackgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            int iteration = 0;            
-
-            while (!startRotate)
-            {
-                angle1 = ToCircleDegrees(angle1 - rotationAngle);
-                angle2 = ToCircleDegrees(angle2 - rotationAngle);
-                angle3 = ToCircleDegrees(angle3 - rotationAngle);
-                angle4 = ToCircleDegrees(angle4 - rotationAngle);
-
-                InitializePoints(angle1, angle2, angle3, angle4);
-                Draw(this.CreateGraphics());
-
-                System.Threading.Thread.Sleep(16);
-
-                iteration++;
-                if (iteration % 10000 == 0)
-                {
-                    iteration = 0;
-                    GC.Collect();
-                }
-            }
+            RotateFigure();
         }
 
         private void Form1_Resize(object sender, EventArgs e)
         {
+            radius = CalcRadius(this.Height, this.Width);
+
             label1.Location = new Point((this.Width - label1.Width) / 2, 3);
             button1.Location = new Point(5, this.Height - button1.Height - 45);
 
-            InitializePoints(angle1, angle2, angle3, angle4);
-            
-            if (startRotate)
-                Draw(this.CreateGraphics());
+            Invalidate();
         }
 
         private void Form1_MouseClick(object sender, MouseEventArgs e)
@@ -118,13 +98,28 @@ namespace RotatingQuadrilateral
             else startRotate = true;
         }
 
-        private void Form1_Paint(object sender, PaintEventArgs e)
-        {            
-            Draw(e.Graphics);
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            DrawFigure(e.Graphics, angle1, angle2, angle3, angle4);
+            base.OnPaint(e);
         }
 
-        public void Draw(Graphics g)
+        private bool InitializePoints(float angle1, float angle2, float angle3, float angle4)
         {
+            circleTopLeft = new PointF(this.Width / 2 - radius, this.Height / 2 - radius);
+            circleCenter = new PointF(circleTopLeft.X + radius, circleTopLeft.Y + radius);
+
+            pointA = RecalculatePoint(angle1, pointA);
+            pointB = RecalculatePoint(angle2, pointB);
+            pointC = RecalculatePoint(angle3, pointC);
+            pointD = RecalculatePoint(angle4, pointD);
+
+            return true;
+        }
+
+        public void ConnectLines(Graphics g)
+        {
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             g.Clear(Form1.DefaultBackColor);
 
             try
@@ -132,32 +127,50 @@ namespace RotatingQuadrilateral
                 g.DrawLine(pen, pointA, pointB);
                 g.DrawLine(pen, pointB, pointC);
                 g.DrawLine(pen, pointC, pointD);
-                g.DrawLine(pen, pointD, pointA);
+                g.DrawLine(pen, pointD, pointA);                
             }
             catch { }
         }
 
-        private bool InitializePoints(float angle1, float angle2, float angle3, float angle4)
+        public void DrawFigure(Graphics g, float p1Angle, float p2Angle, float p3Angle, float p4Angle)
         {
-            radius = this.Width > this.Height ? this.Height / 5 : this.Width / 5;
-
-            circleTopLeft = new PointF(this.Width / 2 - radius, this.Height / 2 - radius);
-            circleCenter = new PointF(circleTopLeft.X + radius, circleTopLeft.Y + radius);
-
-            pointA = GetPoint(angle1);
-            pointB = GetPoint(angle2);
-            pointC = GetPoint(angle3);
-            pointD = GetPoint(angle4);
-
-            return true;
+            InitializePoints(p1Angle, p2Angle, p3Angle, p4Angle);
+            ConnectLines(g);
         }
 
-        private PointF GetPoint(float degree)
+        private void RotateFigure()
+        {
+            //int iteration = 0;
+
+            while (!startRotate)
+            {
+                angle1 = ToCircleDegrees(angle1 - rotationAngle);
+                angle2 = ToCircleDegrees(angle2 - rotationAngle);
+                angle3 = ToCircleDegrees(angle3 - rotationAngle);
+                angle4 = ToCircleDegrees(angle4 - rotationAngle);
+
+                Invalidate();
+
+                //System.Threading.Thread.Sleep(16);
+
+                /*iteration++;
+                if (iteration % 10000 == 0)
+                {
+                    iteration = 0;
+                    GC.Collect();
+                }*/
+            }
+        }        
+
+        private PointF RecalculatePoint(float degree, PointF point)
         {
             float x = (float)(circleCenter.X + radius * Math.Round(Math.Cos(ConvertToRadian(-degree)), 5));
             float y = (float)(circleCenter.Y + radius * Math.Round(Math.Sin(ConvertToRadian(-degree)), 5));
 
-            return new PointF(x, y);
+            point.X = x;
+            point.Y = y;
+
+            return point;
         }
 
         //private float LineLength(PointF point1, PointF point2)
@@ -177,6 +190,12 @@ namespace RotatingQuadrilateral
         private static float ConvertToRadian(float degree)
         {
             return (float)(degree * Math.PI / 180);
+        }
+        
+        private static float CalcRadius(int height, int width)
+        {
+            float radius = width > height ? height / 5f : width / 5f;
+            return radius;
         }
     }
 }
