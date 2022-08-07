@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static PeopleAccounting.Staff.Post.EducationalHelper;
 
 namespace PeopleAccounting.Staff.Post
 {
@@ -12,12 +13,14 @@ namespace PeopleAccounting.Staff.Post
         #endregion
 
         #region Properties
-        private string optionalClasses = "None";
-        public string OptionalClasses
+        private ClassTypes optionalClasses = ClassTypes.None;
+        public ClassTypes OptionalClasses
         {
             get { return optionalClasses; }
             set { optionalClasses = value; }
         }
+
+
         #endregion
 
         #region Methods
@@ -26,17 +29,9 @@ namespace PeopleAccounting.Staff.Post
             Student student = new Student();
 
             student.FillBaseInfo(firstName, lastName, dateOfBirth);
-            student.OptionalClasses = Student.OptionalClassesValidator(optionalClasses);
+            student.OptionalClasses = EducationalHelper.OptionalClassesValidator(optionalClasses);
 
             return student;
-        }
-
-        public static string OptionalClassesValidator(string optionalClasses)
-        {
-            if (!String.IsNullOrEmpty(optionalClasses))
-                return optionalClasses;
-
-            return "None";
         }
 
         public void DropOut()

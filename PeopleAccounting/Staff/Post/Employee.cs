@@ -30,9 +30,9 @@ namespace PeopleAccounting.Staff.Post
         #region Methods
         public static double GetSalary()
         {
-            Console.Write("Salary: ");
+            UniversityHelper.WriteMessage("Salary: ", false);
 
-            if (!double.TryParse(Console.ReadLine(), out double salary) || salary < 0)
+            if (!double.TryParse(UniversityHelper.ReadLine(), out double salary) || salary < 0)
             {
                 UniversityHelper.ErrorMessage();
                 GetSalary();
@@ -55,7 +55,7 @@ namespace PeopleAccounting.Staff.Post
             }
             catch
             {
-                Console.WriteLine("Not an employee!\n");
+                UniversityHelper.WriteMessage("Not an employee!\n");
                 return new Employee();
             }
 

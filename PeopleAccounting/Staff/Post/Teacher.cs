@@ -12,11 +12,22 @@ namespace PeopleAccounting.Staff.Post
         #endregion
 
         #region Properties
-        private string optionalClasses = "None";
-        public string OptionalClasses
+        //private string optionalClasses = "None";
+        //public string OptionalClasses
+        //{
+        //    get { return optionalClasses; }
+        //    set { optionalClasses = value; }
+        //}
+
+        [Flags]
+        public enum OptionalClasses
         {
-            get { return optionalClasses; }
-            set { optionalClasses = value; }
+            None = 0,
+            Math = 1,
+            Physics = 2,
+            PhysicalEducation = 4,
+            Language = 8,
+            All = ~None
         }
         #endregion
 

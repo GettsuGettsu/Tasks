@@ -13,6 +13,11 @@ namespace PeopleAccounting
         {
             return Console.ReadKey(true).KeyChar;
         }
+        
+        internal static string ReadLine()
+        {
+            return Console.ReadLine() + "";
+        }
 
         internal static string GetConsoleString()
         {
@@ -59,6 +64,14 @@ namespace PeopleAccounting
                 Console.WriteLine($"\t{prop.Name}: {prop.GetValue(human)}");
             }
             Console.WriteLine();
+        }
+
+        internal static void WriteMessage(string message, bool isLine = true)
+        {
+            if (isLine)
+                Console.WriteLine(message);
+            else 
+                Console.Write(message);
         }
     }
 }

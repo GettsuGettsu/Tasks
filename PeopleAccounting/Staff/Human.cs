@@ -19,21 +19,21 @@ namespace PeopleAccounting.Staff
         }
 
 
-        protected string firstName = "Not set";
+        protected string firstName = "";
         public string FirstName 
         { 
             get { return firstName; }
         }
 
         
-        protected string lastName = "Not set";
+        protected string lastName = "";
         public string LastName 
         { 
             get { return lastName; }
         }
 
         
-        protected string dateOfBirth = "Not set";
+        protected string dateOfBirth = "";
         public string DateOfBirth
         {
             get { return dateOfBirth; }
@@ -53,13 +53,13 @@ namespace PeopleAccounting.Staff
         {
             string[] baseInfo = new string[3];
 
-            Console.Write("\nEnter first name: ");
+            UniversityHelper.WriteMessage("\nEnter first name: ", false);
             baseInfo[0] = UniversityHelper.GetConsoleString();
 
-            Console.Write("Enter last name: ");
+            UniversityHelper.WriteMessage("Enter last name: ", false);
             baseInfo[1] = UniversityHelper.GetConsoleString();
 
-            Console.Write("Enter date of birth: ");
+            UniversityHelper.WriteMessage("Enter date of birth: ", false);
             baseInfo[2] = UniversityHelper.GetConsoleString();
 
             return baseInfo;
