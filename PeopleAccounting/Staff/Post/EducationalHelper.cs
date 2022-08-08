@@ -28,18 +28,40 @@ namespace PeopleAccounting.Staff.Post
             All = ~None
         }
 
-        public static ClassTypes OptionalClassesValidator(string optionalClasses)
+        public static Student CreateStudent(string firstName, string lastName, string dateOfBirth, string optionalClasses, bool isOnVacation)
+        {
+            Student student = new Student();
+
+            student.FillBaseInfo(firstName, lastName, dateOfBirth);
+            student.OptionalClasses = EducationalHelper.ToOptionalClasses(optionalClasses);
+            student.IsOnVacation = isOnVacation;
+
+            return student;
+        }
+
+        public static Teacher CreateTeacher(string firstName, string lastName, string dateOfBirth, double salary, bool isOnVacation, string optionalClasses)
+        {
+            Teacher teacher = new Teacher();
+            teacher.FillBaseInfo(firstName, lastName, dateOfBirth);
+            teacher.Salary = salary;
+            teacher.IsOnVacation = isOnVacation;
+            teacher.OptionalClasses = EducationalHelper.ToOptionalClasses(optionalClasses);
+
+            return teacher;
+        }
+
+        public static ClassTypes ToOptionalClasses(string optionalClasses)
         {
             ClassTypes types = ClassTypes.None;
             optionalClasses = optionalClasses.ToLower(); //.Trim(chars);
             
-            if (!String.IsNullOrEmpty(optionalClasses))
+            if (String.IsNullOrEmpty(optionalClasses))
                 return types;
 
             if (optionalClasses.Contains("math"))
                 types |= ClassTypes.Math;
 
-            if (optionalClasses.Contains("pysics"))
+            if (optionalClasses.Contains("physics"))
                 types |= ClassTypes.Physics;
 
             if (optionalClasses.Contains("language"))
@@ -51,6 +73,11 @@ namespace PeopleAccounting.Staff.Post
                 types |= ClassTypes.PhysicalEducation;
 
             return types;
+        }
+
+        public static string ToString(ClassTypes classTypes)
+        {
+            return "";
         }
     }
 }

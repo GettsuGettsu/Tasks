@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static PeopleAccounting.Staff.Post.EducationalHelper;
 
 namespace PeopleAccounting.Staff.Post
 {
@@ -12,33 +13,15 @@ namespace PeopleAccounting.Staff.Post
         #endregion
 
         #region Properties
-        //private string optionalClasses = "None";
-        //public string OptionalClasses
-        //{
-        //    get { return optionalClasses; }
-        //    set { optionalClasses = value; }
-        //}
-
-        [Flags]
-        public enum OptionalClasses
+        private ClassTypes optionalClasses = ClassTypes.None;
+        public ClassTypes OptionalClasses
         {
-            None = 0,
-            Math = 1,
-            Physics = 2,
-            PhysicalEducation = 4,
-            Language = 8,
-            All = ~None
+            get { return optionalClasses; }
+            set { optionalClasses = value; }
         }
         #endregion
 
         #region Methods
-        public static string OptionalClassesValidator(string optionalClasses)
-        {
-            if (!String.IsNullOrEmpty(optionalClasses))
-                return optionalClasses;
-
-            return "None";
-        }
         #endregion
 
         public Teacher() 

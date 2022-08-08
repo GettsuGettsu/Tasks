@@ -118,7 +118,7 @@ namespace PeopleAccounting
 
         internal static void AddStudent(string firstName, string lastName, string dateOfBirth, string optionalClasses = "None", bool isOnVacation = false)
         {
-            students.Add(Student.CreateStudent(firstName, lastName, dateOfBirth, optionalClasses, isOnVacation));
+            students.Add(EducationalHelper.CreateStudent(firstName, lastName, dateOfBirth, optionalClasses, isOnVacation));
         }
 
         internal static void RemoveStudent(Student student)

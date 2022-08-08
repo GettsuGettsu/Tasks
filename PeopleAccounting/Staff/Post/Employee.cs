@@ -49,7 +49,7 @@ namespace PeopleAccounting.Staff.Post
 
                 if (isTeacher)
                 {
-                    ((Teacher)human).OptionalClasses = optionalClasses;
+                    ((Teacher)human).OptionalClasses = EducationalHelper.ToOptionalClasses(optionalClasses);
                     return (Teacher)human;
                 }
             }
@@ -72,23 +72,14 @@ namespace PeopleAccounting.Staff.Post
 
             if (isTeacher)
             {                       
-                Teacher teacher = CreateTeacher(firstName, lastName, dateOfBirth, salary, isOnVacation, Teacher.OptionalClassesValidator(optionalClasses));
+                Teacher teacher = EducationalHelper.CreateTeacher(firstName, lastName, dateOfBirth, salary, isOnVacation, optionalClasses);
                 return teacher;
             }
 
             return employee;
         }
 
-        private static Teacher CreateTeacher(string firstName, string lastName, string dateOfBirth, double salary, bool isOnVacation, string optionalClasses)
-        {
-            Teacher teacher = new Teacher();
-            teacher.FillBaseInfo(firstName, lastName, dateOfBirth);
-            teacher.Salary = salary;
-            teacher.IsOnVacation = isOnVacation;
-            teacher.OptionalClasses = optionalClasses;
-
-            return teacher;
-        }
+        
         #endregion
 
         public Employee() { }
