@@ -7,7 +7,7 @@ using static PeopleAccounting.Staff.Post.EducationalHelper;
 
 namespace PeopleAccounting.Staff.Post
 {
-    public class Teacher : Employee
+    public class Student : Human
     {
         #region Fields
         #endregion
@@ -22,12 +22,12 @@ namespace PeopleAccounting.Staff.Post
         #endregion
 
         #region Methods
+        public void DropOut(University university)
+        {
+            university.RemoveStudent(this);
+        }
         #endregion
 
-        public Teacher() 
-        {            
-            isFormalForm = false;
-            isTeacher = true;
-        }
+        public Student() { }
     }
 }

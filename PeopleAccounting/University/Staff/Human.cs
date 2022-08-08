@@ -70,7 +70,7 @@ namespace PeopleAccounting.Staff
             this.firstName = firstName;
             this.lastName = lastName;
             this.dateOfBirth = dateOfBirth;
-        }
+        }        
         #endregion
 
         public Human() { }

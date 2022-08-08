@@ -10,8 +10,8 @@ namespace PeopleAccounting
 {
     public class University
     {
-        private static List<Human> staff = new List<Human>();        
-        private static List<Student> students = new List<Student>();
+        public List<Human> staff = new List<Human>();        
+        public List<Student> students = new List<Student>();
         //public List<Teacher> teachers = new List<Teacher>();
         //public List<Employee> employees = new List<Employee>();
 
@@ -64,7 +64,7 @@ namespace PeopleAccounting
             UniversityHelper.ReadChar();
         }
 
-        internal static void AddingEducationalHuman(bool isTeacher)
+        public void AddingEducationalHuman(bool isTeacher)
         {
             string[] baseInfo = Human.GetBaseInfo();
             string optionalClasses = "None";
@@ -83,7 +83,7 @@ namespace PeopleAccounting
             else AddStudent(baseInfo[0], baseInfo[1], baseInfo[2], optionalClasses, false);
         }
 
-        internal static void AddingEmployee()
+        internal void AddingEmployee()
         {
             string[] baseInfo = Human.GetBaseInfo();
             double salary = Employee.GetSalary();
@@ -91,37 +91,37 @@ namespace PeopleAccounting
             AddEmployee(baseInfo[0], baseInfo[1], baseInfo[2], salary, false, false);
         }
 
-        internal static void AddEmployee(Employee employee)
+        public void AddEmployee(Employee employee)
         {
             staff.Add(employee);
         }
 
-        internal static void AddEmployee(Human human, double salary, bool isTeacher, string optionalClasses = "None")
+        public void AddEmployee(Human human, double salary, bool isTeacher, string optionalClasses = "None")
         {
-            staff.Add(Employee.CreateEmployee(human, salary, isTeacher, optionalClasses));
+            staff.Add(Employee.AddEmployee(human, salary, isTeacher, optionalClasses));
         }
 
-        internal static void AddEmployee(string firstName, string lastName, string dateOfBirth, double salary, bool isTeacher, bool isOnVacation = false, string optionalClasses = "None")
+        public void AddEmployee(string firstName, string lastName, string dateOfBirth, double salary, bool isTeacher, bool isOnVacation = false, string optionalClasses = "None")
         {
-            staff.Add(Employee.CreateEmployee(firstName, lastName, dateOfBirth, salary, isOnVacation, isTeacher, optionalClasses));
+            staff.Add(Employee.AddEmployee(firstName, lastName, dateOfBirth, salary, isOnVacation, isTeacher, optionalClasses));
         }
 
-        internal static void RemoveEmployee(Employee employee)
+        public void RemoveEmployee(Employee employee)
         {
             staff.Remove(employee);
         }
 
-        internal static void AddStudent(Student student)
+        public void AddStudent(Student student)
         {
             students.Add(student);
         }
 
-        internal static void AddStudent(string firstName, string lastName, string dateOfBirth, string optionalClasses = "None", bool isOnVacation = false)
+        public void AddStudent(string firstName, string lastName, string dateOfBirth, string optionalClasses = "None", bool isOnVacation = false)
         {
-            students.Add(EducationalHelper.CreateStudent(firstName, lastName, dateOfBirth, optionalClasses, isOnVacation));
+            students.Add(EducationalHelper.AddStudent(firstName, lastName, dateOfBirth, isOnVacation, optionalClasses));
         }
 
-        internal static void RemoveStudent(Student student)
+        public void RemoveStudent(Student student)
         {
             students.Remove(student);
         }

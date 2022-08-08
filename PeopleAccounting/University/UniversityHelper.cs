@@ -50,7 +50,9 @@ namespace PeopleAccounting
             else if (readChar != 'y' && readChar != 'Y')
             {
                 Console.WriteLine("\nWrong character!");
-                YesNoQuestion(question);
+                bool answer = YesNoQuestion(question);
+                if (!answer)
+                    return false;
             }
 
             return true;

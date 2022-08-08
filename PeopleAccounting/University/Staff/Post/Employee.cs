@@ -28,7 +28,7 @@ namespace PeopleAccounting.Staff.Post
         #endregion
 
         #region Methods
-        public static double GetSalary()
+        internal static double GetSalary()
         {
             UniversityHelper.WriteMessage("Salary: ", false);
 
@@ -41,28 +41,17 @@ namespace PeopleAccounting.Staff.Post
             return salary;
         }
 
-        public static Employee CreateEmployee(Human human, double salary, bool isTeacher, string optionalClasses)
+        internal static Employee AddEmployee(Human human, double salary, bool isOnVacation)
         {
-            try
-            {
-                ((Employee)human).Salary = salary;
-
-                if (isTeacher)
-                {
-                    ((Teacher)human).OptionalClasses = EducationalHelper.ToOptionalClasses(optionalClasses);
-                    return (Teacher)human;
-                }
-            }
-            catch
-            {
-                UniversityHelper.WriteMessage("Not an employee!\n");
-                return new Employee();
-            }
-
-            return (Employee)human;
+            Employee employee = new Employee();
+            employee.FillBaseInfo(human.FirstName, human.LastName, human.DateOfBirth);
+            employee.Salary = salary;
+            employee.IsOnVacation = isOnVacation;
+            
+            return employee;
         }
 
-        public static Employee CreateEmployee(string firstName, string lastName, string dateOfBirth, double salary, bool isOnVacation, bool isTeacher, string optionalClasses)
+        internal static Employee AddEmployee(string firstName, string lastName, string dateOfBirth, double salary, bool isOnVacation)
         {
             Employee employee = new Employee();
 
@@ -70,16 +59,8 @@ namespace PeopleAccounting.Staff.Post
             employee.Salary = salary;
             employee.IsOnVacation = isOnVacation;
 
-            if (isTeacher)
-            {                       
-                Teacher teacher = EducationalHelper.CreateTeacher(firstName, lastName, dateOfBirth, salary, isOnVacation, optionalClasses);
-                return teacher;
-            }
-
             return employee;
         }
-
-        
         #endregion
 
         public Employee() { }
