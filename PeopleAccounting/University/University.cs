@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static PeopleAccounting.Staff.Post.EducationalHelper;
 
 namespace PeopleAccounting
 {
@@ -64,7 +65,7 @@ namespace PeopleAccounting
             UniversityHelper.ReadChar();
         }
 
-        public void AddingEducationalHuman(bool isTeacher)
+        internal void AddingEducationalHuman(bool isTeacher)
         {
             string[] baseInfo = Human.GetBaseInfo();
             string optionalClasses = "None";
@@ -78,9 +79,9 @@ namespace PeopleAccounting
             if (isTeacher)
             {
                 double salary = Employee.GetSalary();
-                AddEmployee(baseInfo[0], baseInfo[1], baseInfo[2], salary, true, false, optionalClasses);
+                AddTeacher(baseInfo[0], baseInfo[1], baseInfo[2], salary, false, optionalClasses);
             }
-            else AddStudent(baseInfo[0], baseInfo[1], baseInfo[2], optionalClasses, false);
+            else AddStudent(baseInfo[0], baseInfo[1], baseInfo[2], false, optionalClasses);
         }
 
         internal void AddingEmployee()
@@ -88,7 +89,7 @@ namespace PeopleAccounting
             string[] baseInfo = Human.GetBaseInfo();
             double salary = Employee.GetSalary();
 
-            AddEmployee(baseInfo[0], baseInfo[1], baseInfo[2], salary, false, false);
+            AddEmployee(baseInfo[0], baseInfo[1], baseInfo[2], salary, false);
         }
 
         public void AddEmployee(Employee employee)
@@ -96,14 +97,14 @@ namespace PeopleAccounting
             staff.Add(employee);
         }
 
-        public void AddEmployee(Human human, double salary, bool isTeacher, string optionalClasses = "None")
+        public void AddEmployee(Human human, double salary, bool isOnVacation)
         {
-            staff.Add(Employee.AddEmployee(human, salary, isTeacher, optionalClasses));
+            staff.Add(Employee.Add(human, salary, isOnVacation));
         }
 
-        public void AddEmployee(string firstName, string lastName, string dateOfBirth, double salary, bool isTeacher, bool isOnVacation = false, string optionalClasses = "None")
+        public void AddEmployee(string firstName, string lastName, string dateOfBirth, double salary, bool isOnVacation)
         {
-            staff.Add(Employee.AddEmployee(firstName, lastName, dateOfBirth, salary, isOnVacation, isTeacher, optionalClasses));
+            staff.Add(Employee.Add(firstName, lastName, dateOfBirth, salary, isOnVacation));
         }
 
         public void RemoveEmployee(Employee employee)
@@ -111,19 +112,79 @@ namespace PeopleAccounting
             staff.Remove(employee);
         }
 
+        public void AddTeacher(Teacher teacher)
+        {
+            staff.Add(teacher);
+        }
+
+        public void AddTeacher(Human human, double salary, bool isOnVacation, string optionalClasses)
+        {
+            staff.Add(Teacher.Add(human, salary, isOnVacation, EducationalHelper.ToOptionalClasses(optionalClasses)));
+        }
+
+        public void AddTeacher(Human human, double salary, bool isOnVacation, ClassTypes optionalClasses)
+        {
+            staff.Add(Teacher.Add(human, salary, isOnVacation, optionalClasses));
+        }
+
+        public void AddTeacher(string firstName, string lastName, string dateOfBirth, double salary, bool isOnVacation, string optionalClasses)
+        {
+            staff.Add(Teacher.Add(firstName, lastName, dateOfBirth, salary, isOnVacation, EducationalHelper.ToOptionalClasses(optionalClasses)));
+        }
+
+        public void AddTeacher(string firstName, string lastName, string dateOfBirth, double salary, bool isOnVacation, ClassTypes optionalClasses)
+        {
+            staff.Add(Teacher.Add(firstName, lastName, dateOfBirth, salary, isOnVacation, optionalClasses));
+        }
+
         public void AddStudent(Student student)
         {
             students.Add(student);
         }
 
-        public void AddStudent(string firstName, string lastName, string dateOfBirth, string optionalClasses = "None", bool isOnVacation = false)
+        public void AddStudent(Human human, bool isOnVacation, string optionalClasses)
         {
-            students.Add(EducationalHelper.AddStudent(firstName, lastName, dateOfBirth, isOnVacation, optionalClasses));
+            students.Add(Student.Add(human, isOnVacation, EducationalHelper.ToOptionalClasses(optionalClasses)));
+        }
+
+        public void AddStudent(Human human, bool isOnVacation, ClassTypes optionalClasses)
+        {
+            students.Add(Student.Add(human, isOnVacation, optionalClasses));
+        }
+
+        public void AddStudent(string firstName, string lastName, string dateOfBirth, bool isOnVacation, string optionalClasses)
+        {
+            students.Add(Student.Add(firstName, lastName, dateOfBirth, isOnVacation, EducationalHelper.ToOptionalClasses(optionalClasses)));
+        }
+
+        public void AddStudent(string firstName, string lastName, string dateOfBirth, bool isOnVacation, ClassTypes optionalClasses)
+        {
+            students.Add(Student.Add(firstName, lastName, dateOfBirth, isOnVacation, optionalClasses));
         }
 
         public void RemoveStudent(Student student)
         {
             students.Remove(student);
+        }
+
+        public (List<Student>, List<Teacher>) GetListOfParticipants(ClassTypes classTypes)
+        {
+            List<Student> students = new List<Student>();
+            List<Teacher> teachers = new List<Teacher>();
+
+            foreach (Student student in this.students)
+            {
+                if (student.OptionalClasses.HasFlag(classTypes))
+                    students.Add(student);
+            }
+
+            foreach (Human human in this.staff)
+            {
+                if (human.GetType() == typeof(Teacher) && ((Teacher)human).OptionalClasses.HasFlag(classTypes))
+                    teachers.Add((Teacher)human);
+            }
+
+            return (students, teachers);
         }
         #endregion
 

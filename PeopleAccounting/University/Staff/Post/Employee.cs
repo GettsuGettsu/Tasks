@@ -41,17 +41,17 @@ namespace PeopleAccounting.Staff.Post
             return salary;
         }
 
-        internal static Employee AddEmployee(Human human, double salary, bool isOnVacation)
+        internal static Employee Add(Human human, double salary, bool isOnVacation)
         {
-            Employee employee = new Employee();
-            employee.FillBaseInfo(human.FirstName, human.LastName, human.DateOfBirth);
-            employee.Salary = salary;
-            employee.IsOnVacation = isOnVacation;
-            
-            return employee;
+            return Add2(human.FirstName, human.LastName, human.DateOfBirth, salary, isOnVacation);
         }
 
-        internal static Employee AddEmployee(string firstName, string lastName, string dateOfBirth, double salary, bool isOnVacation)
+        internal static Employee Add(string firstName, string lastName, string dateOfBirth, double salary, bool isOnVacation)
+        {
+            return Add2(firstName, lastName, dateOfBirth, salary, isOnVacation);
+        }
+
+        private static Employee Add2(string firstName, string lastName, string dateOfBirth, double salary, bool isOnVacation)
         {
             Employee employee = new Employee();
 

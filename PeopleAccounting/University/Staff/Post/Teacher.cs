@@ -22,35 +22,42 @@ namespace PeopleAccounting.Staff.Post
         #endregion
 
         #region Methods
-        internal static Teacher AddTeacher(Human human, double salary, bool isOnVacation, string optionalClasses)
-        {
-            Teacher teacher = new Teacher();
+        //internal static Teacher AddTeacher(Human human, double salary, bool isOnVacation, string optionalClasses)
+        //{
+        //    Teacher teacher = AddTeacher2(human.FirstName, human.LastName, human.DateOfBirth, salary, isOnVacation);            
+        //    teacher.OptionalClasses = EducationalHelper.ToOptionalClasses(optionalClasses);
 
-            teacher.FillBaseInfo(human.FirstName, human.LastName, human.DateOfBirth);
-            teacher.Salary = salary;
-            teacher.IsOnVacation = isOnVacation;
-            
-            teacher.OptionalClasses = EducationalHelper.ToOptionalClasses(optionalClasses);
+        //    return teacher;
+        //}
+
+        internal static Teacher Add(Human human, double salary, bool isOnVacation, ClassTypes optionalClasses)
+        {
+            Teacher teacher = Add2(human.FirstName, human.LastName, human.DateOfBirth, salary, isOnVacation);
+            teacher.OptionalClasses = optionalClasses;
 
             return teacher;
         }
 
-        internal static Teacher AddTeacher(string firstName, string lastName, string dateOfBirth, double salary, bool isOnVacation)
+        //internal static Teacher AddTeacher(string firstName, string lastName, string dateOfBirth, double salary, bool isOnVacation, string optionalClasses)
+        //{
+        //    Teacher teacher = AddTeacher2(firstName, lastName, dateOfBirth, salary, isOnVacation);
+        //    teacher.OptionalClasses = EducationalHelper.ToOptionalClasses(optionalClasses);
+
+        //    return teacher;
+        //}
+
+        internal static Teacher Add(string firstName, string lastName, string dateOfBirth, double salary, bool isOnVacation, ClassTypes optionalClasses)
+        {
+            Teacher teacher = Add2(firstName, lastName, dateOfBirth, salary, isOnVacation);
+            teacher.OptionalClasses = optionalClasses;
+
+            return teacher;
+        }
+
+        private static Teacher Add2(string firstName, string lastName, string dateOfBirth, double salary, bool isOnVacation)
         {
             Teacher teacher = new Teacher();
-
             teacher.FillBaseInfo(firstName, lastName, dateOfBirth);
-            teacher.Salary = salary;
-            teacher.IsOnVacation = isOnVacation;
-
-            return teacher;
-        }
-
-        private static Teacher AddTeacher2(Human human, double salary, bool isOnVacation)
-        {
-            Teacher teacher = new Teacher();
-
-            teacher.FillBaseInfo(human.FirstName, human.LastName, human.DateOfBirth);
             teacher.Salary = salary;
             teacher.IsOnVacation = isOnVacation;
 
