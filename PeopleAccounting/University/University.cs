@@ -17,7 +17,7 @@ namespace PeopleAccounting
         //public List<Employee> employees = new List<Employee>();
 
         #region Methods
-        public void Start() 
+        private void Start() 
         {
             while (true)
             {
@@ -65,7 +65,7 @@ namespace PeopleAccounting
             UniversityHelper.ReadChar();
         }
 
-        internal void AddingEducationalHuman(bool isTeacher)
+        private void AddingEducationalHuman(bool isTeacher)
         {
             string[] baseInfo = Human.GetBaseInfo();
             string optionalClasses = "None";
@@ -84,7 +84,7 @@ namespace PeopleAccounting
             else AddStudent(baseInfo[0], baseInfo[1], baseInfo[2], false, optionalClasses);
         }
 
-        internal void AddingEmployee()
+        private void AddingEmployee()
         {
             string[] baseInfo = Human.GetBaseInfo();
             double salary = Employee.GetSalary();

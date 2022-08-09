@@ -51,11 +51,55 @@ namespace PeopleAccounting.Staff.Post
                 types |= ClassTypes.PhysicalEducation;
 
             return types;
-        }        
+        }
 
         internal static string ToString(ClassTypes classTypes)
         {
-            return "";
+            throw new NotImplementedException("Method is not implemented yet!");
+        }
+
+        public static Teacher AddOptionalClass(Teacher teacher, ClassTypes classType)
+        {
+            teacher.OptionalClasses |= classType;
+            return teacher;
+        }
+
+        public static Student AddOptionalClass(Student student, ClassTypes classType)
+        {
+            student.OptionalClasses |= classType;
+            return student;
+        }
+
+        public static Teacher RemoveOptionalClass(Teacher teacher, ClassTypes classType)
+        {
+            //if (IsClassTypeExist(teacher.OptionalClasses, classType))
+            //    teacher.OptionalClasses ^= classType;
+            teacher.OptionalClasses &= ~classType;
+
+            return teacher;
+        }
+
+        public static Student RemoveOptionalClass(Student student, ClassTypes classType)
+        {
+            //if (IsClassTypeExist(student.OptionalClasses, classType))
+            //    student.OptionalClasses ^= classType;
+            student.OptionalClasses &= ~classType;
+
+            return student;
+        }
+
+        /// <summary>
+        /// Method check if type2 exist in the type1 enumeration.
+        /// </summary>
+        /// <param name="type1"></param>
+        /// <param name="type2"></param>
+        /// <returns></returns>
+        private static bool IsClassTypeExist(ClassTypes type1, ClassTypes type2)
+        {
+            if ((type1 & type2) != ClassTypes.None)
+                return true;
+
+            return false;
         }
     }
 }

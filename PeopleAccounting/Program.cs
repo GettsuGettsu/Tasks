@@ -1,5 +1,6 @@
 ﻿using PeopleAccounting.Staff;
 using PeopleAccounting.Staff.Post;
+using static PeopleAccounting.Staff.Post.EducationalHelper;
 
 namespace PeopleAccounting;
 
