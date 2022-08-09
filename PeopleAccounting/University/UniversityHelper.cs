@@ -58,9 +58,11 @@ namespace PeopleAccounting
             return true;
         }
 
-        internal static void WriteAllProp<T>(T human)
+        internal static void WriteAllProp<T>(T human, Type t = null)
         {
-            Console.WriteLine("\nAdded:");
+            t = typeof(Staff.Human);
+            //Console.WriteLine("\nAdded:");
+            Console.WriteLine($"\n{typeof(T)}: ");
             foreach (var prop in typeof(T).GetProperties())
             {
                 Console.WriteLine($"\t{prop.Name}: {prop.GetValue(human)}");

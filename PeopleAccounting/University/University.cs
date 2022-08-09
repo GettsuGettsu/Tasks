@@ -97,7 +97,7 @@ namespace PeopleAccounting
             staff.Add(employee);
         }
 
-        public void AddEmployee(Human human, double salary, bool isOnVacation)
+        /*public void AddEmployee(Human human, double salary, bool isOnVacation)
         {
             staff.Add(Employee.Add(human, salary, isOnVacation));
         }
@@ -105,7 +105,7 @@ namespace PeopleAccounting
         public void AddEmployee(string firstName, string lastName, string dateOfBirth, double salary, bool isOnVacation)
         {
             staff.Add(Employee.Add(firstName, lastName, dateOfBirth, salary, isOnVacation));
-        }
+        }*/
 
         public void RemoveEmployee(Employee employee)
         {
@@ -117,7 +117,7 @@ namespace PeopleAccounting
             staff.Add(teacher);
         }
 
-        public void AddTeacher(Human human, double salary, bool isOnVacation, string optionalClasses)
+        /*public void AddTeacher(Human human, double salary, bool isOnVacation, string optionalClasses)
         {
             staff.Add(Teacher.Add(human, salary, isOnVacation, EducationalHelper.ToOptionalClasses(optionalClasses)));
         }
@@ -135,6 +135,11 @@ namespace PeopleAccounting
         public void AddTeacher(string firstName, string lastName, string dateOfBirth, double salary, bool isOnVacation, ClassTypes optionalClasses)
         {
             staff.Add(Teacher.Add(firstName, lastName, dateOfBirth, salary, isOnVacation, optionalClasses));
+        }*/
+
+        public void RemoveTeacher(Teacher teacher)
+        {
+            staff.Remove(teacher);
         }
 
         public void AddStudent(Student student)
@@ -142,7 +147,7 @@ namespace PeopleAccounting
             students.Add(student);
         }
 
-        public void AddStudent(Human human, bool isOnVacation, string optionalClasses)
+        /*public void AddStudent(Human human, bool isOnVacation, string optionalClasses)
         {
             students.Add(Student.Add(human, isOnVacation, EducationalHelper.ToOptionalClasses(optionalClasses)));
         }
@@ -160,7 +165,7 @@ namespace PeopleAccounting
         public void AddStudent(string firstName, string lastName, string dateOfBirth, bool isOnVacation, ClassTypes optionalClasses)
         {
             students.Add(Student.Add(firstName, lastName, dateOfBirth, isOnVacation, optionalClasses));
-        }
+        }*/
 
         public void RemoveStudent(Student student)
         {

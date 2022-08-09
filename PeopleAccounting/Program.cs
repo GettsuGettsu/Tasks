@@ -13,7 +13,7 @@ internal class Program
 
         university1.AddStudent("Alex", "Morr", "21/07/1999", false, "Math,PE");
         university1.AddStudent("Mira", "Storm", "14/02/1999", false, "Language;;;physics");
-        university1.AddStudent("Maxin", "Trooper", "02/04/1998", false, "physics"); // need add sex to human class
+        university1.AddStudent("Maxin", "Trooper", "02/04/1998", false, "physics"); // need add sex to student class
 
         Employee employee1 = new Employee();
         employee1.FillBaseInfo("Aran", "Logan", "30/01/1975");
@@ -43,13 +43,21 @@ internal class Program
         university1.AddTeacher(teacher2, 810, true, "math,physics");
         university1.AddTeacher("Alex", "Kirinn", "06/06/1976", 815, true, "no");
 
-        var list = university1.GetListOfParticipants(EducationalHelper.ClassTypes.Math | EducationalHelper.ClassTypes.PhysicalEducation);
+        var lists = university1.GetListOfParticipants(EducationalHelper.ClassTypes.Math | EducationalHelper.ClassTypes.PhysicalEducation);
 
-        foreach (Student human in university1.students)
-            UniversityHelper.WriteAllProp(human);
+        foreach (Student student in lists.Item1)
+            UniversityHelper.WriteAllProp(student);
 
-        foreach (Human human in university1.staff)
-            UniversityHelper.WriteAllProp(human);
+        foreach (Teacher teacher in lists.Item2)
+            UniversityHelper.WriteAllProp(teacher);
+
+        Console.WriteLine("\n-----------------------------");
+
+        foreach (Student student in university1.students)
+            UniversityHelper.WriteAllProp(student);
+
+        foreach (Human staff in university1.staff)
+            UniversityHelper.WriteAllProp(staff);
 
         Console.ReadKey(false); // debugging
     }        
