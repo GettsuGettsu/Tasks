@@ -28,18 +28,18 @@ namespace PeopleAccounting.Staff.Post
         #endregion
 
         #region Methods
-        internal static double GetSalary()
-        {
-            UniversityHelper.WriteMessage("Salary: ", false);
+        //internal static double GetSalary()
+        //{
+        //    UniversityHelper.WriteMessage("Salary: ", false);
 
-            if (!double.TryParse(UniversityHelper.ReadLine(), out double salary) || salary < 0)
-            {
-                UniversityHelper.ErrorMessage();
-                GetSalary();
-            }
+        //    if (!double.TryParse(UniversityHelper.ReadLine(), out double salary) || salary < 0)
+        //    {
+        //        UniversityHelper.ErrorMessage();
+        //        GetSalary();
+        //    }
 
-            return salary;
-        }
+        //    return salary;
+        //}
 
         //internal static Employee Add(Human human, double salary, bool isOnVacation)
         //{

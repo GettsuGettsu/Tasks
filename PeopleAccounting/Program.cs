@@ -8,12 +8,12 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        University university1 = new();
+        University university1 = new("");
         //university.Start();
 
-        university1.AddStudent("Alex", "Morr", "21/07/1999", false, "Math,PE");
-        university1.AddStudent("Mira", "Storm", "14/02/1999", false, "Language;;;physics");
-        university1.AddStudent("Maxin", "Trooper", "02/04/1998", false, "physics"); // need add sex to student class
+        university1.AddStudent(new Student("Alex", "Morr", "21/07/1999", false, "Math,PE"));
+        university1.AddStudent(new Student("Mira", "Storm", "14/02/1999", false, "Language;;;physics"));
+        university1.AddStudent(new Student("Maxin", "Trooper", "02/04/1998", false, "physics")); // need add sex to human class
 
         Employee employee1 = new Employee();
         employee1.FillBaseInfo("Aran", "Logan", "30/01/1975");
@@ -22,7 +22,7 @@ internal class Program
 
         university1.AddEmployee(employee1);
 
-        Human employee2 = new Human();
+        Employee employee2 = new Employee();
         employee2.FillBaseInfo("Serena", "Waltz", "22/11/1985");
         employee2.IsOnVacation = false;
 
