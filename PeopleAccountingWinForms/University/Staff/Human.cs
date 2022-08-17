@@ -35,8 +35,8 @@ namespace PeopleAccounting.Staff
         }
 
         
-        protected string dateOfBirth;
-        public string DateOfBirth
+        protected DateTime dateOfBirth;
+        public DateTime DateOfBirth
         {
             get { return dateOfBirth; }
             set { dateOfBirth = value; }
@@ -67,7 +67,7 @@ namespace PeopleAccounting.Staff
             return baseInfo;
         }*/
 
-        public void FillBaseInfo(string firstName, string lastName, string dateOfBirth)
+        public void FillBaseInfo(string firstName, string lastName, DateTime dateOfBirth)
         {
             this.firstName = firstName;
             this.lastName = lastName;
@@ -75,9 +75,9 @@ namespace PeopleAccounting.Staff
         }
         #endregion
 
-        public Human() : this("", "", DateTime.MinValue.ToString(), false) { }
+        public Human() : this("", "", DateTime.MinValue, false) { }
         
-        public Human(string firstName, string lastName, string dateOfBirth, bool isOnVacation) 
+        public Human(string firstName, string lastName, DateTime dateOfBirth, bool isOnVacation) 
         {
             this.firstName = firstName;
             this.lastName = lastName;

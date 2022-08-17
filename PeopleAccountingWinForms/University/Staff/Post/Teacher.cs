@@ -65,9 +65,9 @@ namespace PeopleAccounting.Staff.Post
         //}
         #endregion
 
-        public Teacher() : this("", "", DateTime.MinValue.ToString(), false, 0.0, "") { }
+        public Teacher() : this("", "", DateTime.MinValue, false, 0.0, "") { }
 
-        public Teacher(string firstName, string lastName, string dateOfBirth, bool isOnVacation, double salary, string optionalClasses)
+        public Teacher(string firstName, string lastName, DateTime dateOfBirth, bool isOnVacation, double salary, string optionalClasses)
         {
             this.firstName = firstName;
             this.lastName = lastName;
@@ -76,9 +76,10 @@ namespace PeopleAccounting.Staff.Post
             this.salary = salary;
             this.optionalClasses = EducationalHelper.ToOptionalClasses(optionalClasses);
             this.isFormalForm = true;
+            this.isTeacher = true;
         }
 
-        public Teacher(string firstName, string lastName, string dateOfBirth, bool isOnVacation, double salary, ClassTypes optionalClasses)
+        public Teacher(string firstName, string lastName, DateTime dateOfBirth, bool isOnVacation, double salary, ClassTypes optionalClasses)
         {
             this.firstName = firstName;
             this.lastName = lastName;
@@ -87,6 +88,7 @@ namespace PeopleAccounting.Staff.Post
             this.salary = salary;
             this.optionalClasses = optionalClasses;
             this.isFormalForm = true;
+            this.isTeacher = true;
         }
     }
 }

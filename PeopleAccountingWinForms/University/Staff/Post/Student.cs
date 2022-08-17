@@ -59,9 +59,9 @@ namespace PeopleAccounting.Staff.Post
         }
         #endregion
 
-        public Student() : this("", "", DateTime.MinValue.ToString(), false, "") { }
+        public Student() : this("", "", DateTime.MinValue, false, "") { }
 
-        public Student(string firstName, string lastName, string dateOfBirth, bool isOnVacation, string optionalClasses)
+        public Student(string firstName, string lastName, DateTime dateOfBirth, bool isOnVacation, string optionalClasses)
         {
             this.firstName = firstName;
             this.lastName = lastName;
@@ -71,7 +71,7 @@ namespace PeopleAccounting.Staff.Post
             this.isFormalForm = true;
         }
 
-        public Student(string firstName, string lastName, string dateOfBirth, bool isOnVacation, ClassTypes optionalClasses)
+        public Student(string firstName, string lastName, DateTime dateOfBirth, bool isOnVacation, ClassTypes optionalClasses)
         {
             this.firstName = firstName;
             this.lastName = lastName;

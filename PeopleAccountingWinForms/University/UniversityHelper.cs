@@ -1,4 +1,5 @@
-﻿using PeopleAccounting.Staff.Post;
+﻿using PeopleAccounting.Staff;
+using PeopleAccounting.Staff.Post;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,7 +61,7 @@ namespace PeopleAccounting
 
         internal static void WriteAllProp<T>(T human, Type t = null)
         {
-            t = typeof(Staff.Human);
+            t = typeof(T);
             //Console.WriteLine("\nAdded:");
             Console.WriteLine($"\n{typeof(T)}: ");
             foreach (var prop in typeof(T).GetProperties())

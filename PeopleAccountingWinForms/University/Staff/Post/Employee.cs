@@ -20,11 +20,11 @@ namespace PeopleAccounting.Staff.Post
             set { salary = value; }
         }
 
-        //protected bool isTeacher = false;
-        //public bool IsTeacher
-        //{
-        //    get { return isTeacher; }
-        //}
+        protected bool isTeacher;
+        public bool IsTeacher
+        {
+            get { return isTeacher; }
+        }
         #endregion
 
         #region Methods
@@ -63,9 +63,9 @@ namespace PeopleAccounting.Staff.Post
         //}
         #endregion
 
-        public Employee() : this("", "", DateTime.MinValue.ToString(), false, 0.0) { }
+        public Employee() : this("", "", DateTime.MinValue, false, 0.0) { }
 
-        public Employee(string firstName, string lastName, string dateOfBirth, bool isOnVacation, double salary)
+        public Employee(string firstName, string lastName, DateTime dateOfBirth, bool isOnVacation, double salary)
         {
             this.firstName = firstName;
             this.lastName = lastName;
@@ -73,6 +73,7 @@ namespace PeopleAccounting.Staff.Post
             this.isOnVacation = isOnVacation;
             this.salary = salary;
             this.isFormalForm = true;
+            this.isTeacher = false;
         }
     }
 }

@@ -14,8 +14,8 @@ namespace PeopleAccounting
         private string name;
         public string Name { get { return name; } }
 
-        private List<Human> staff = new List<Human>();
-        public List<Human> Staff
+        private List<Employee> staff = new List<Employee>();
+        public List<Employee> Staff
         {
             get { return staff; }
         }
