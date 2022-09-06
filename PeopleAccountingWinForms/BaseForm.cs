@@ -16,6 +16,8 @@ namespace PeopleAccountingWinForms
 {
     public partial class BaseForm : Form
     {
+        internal readonly University university1 = new University("FirstUniv");
+
         public BaseForm()
         {
             InitializeComponent();
@@ -23,8 +25,6 @@ namespace PeopleAccountingWinForms
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            University university1 = new University("FirstUniv");
-
             university1.AddEmployee(new Employee("Andre", "Croldan", new DateTime(1991, 03, 14), false, 400));
             university1.AddEmployee(new Employee("Lena", "Hordan", new DateTime(1987, 11, 07), false, 450));
             // 0 fName,
@@ -39,48 +39,23 @@ namespace PeopleAccountingWinForms
             // 0 oClasses,
             // 1 salary,
             // 2 isTeacher,
-            // 3 isFormalForm,
-            // 4 fName,
-            // 5 lName,
-            // 6 doBirth,
-            // 7 isOnVac
+            // 3 fName,
+            // 4 lName,
+            // 5 doBirth,
+            // 6 isOnVac            
+            // 7 isFormalForm,
+        }        
 
-            DataTable staffTable = new DataTable();
-            DataColumn[] columns = GetColumns(typeof(Teacher));
-            //columns.ToList().Ins
-
-            //staffTable.Columns.AddRange();            
-
-           /* foreach (var item in university1.Staff)
-            {
-                var row1 = staffTable.NewRow();// Rows.Add(a);
-                var props = item.GetType().GetProperties(); //row1[a]
-
-                for (int i = 0; i < props.Length; i++)
-                {
-                    row1[i] = props[i].GetValue(item);
-                }
-
-                staffTable.Rows.Add(row1);
-            }*/
-
-            //DataGridViewTextBoxCell cell1 = new DataGridViewTextBoxCell();
-            //DataGridViewColumn column1 = new DataGridViewColumn();
-            //dataGridView1.Columns.Add(new DataGridViewColumn(new DataGridViewTextBoxCell()));
-            //dataGridView1.DataSource = staffTable;
+        private void button1_Click(object sender, EventArgs e)
+        {
+            StaffForm staffForm = new StaffForm();
+            staffForm.Show(this);
         }
 
-        private DataColumn[] GetColumns(Type type)
+        private void button2_Click(object sender, EventArgs e)
         {
-            PropertyInfo[] objectProperties = type.GetProperties();
-            DataColumn[] columns = new DataColumn[objectProperties.Length];
-            
-            for (int i = 0; i < objectProperties.Length; i++)
-            {
-                columns[i] = new DataColumn(objectProperties[i].Name, objectProperties[i].PropertyType);
-            }
-
-            return columns;
+            StudentsForm studentsForm = new StudentsForm();
+            studentsForm.Show(this);
         }
     }
 }

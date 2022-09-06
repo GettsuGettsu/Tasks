@@ -12,13 +12,6 @@ namespace PeopleAccounting.Staff
         #endregion
 
         #region Properties
-        protected bool isFormalForm = true;
-        public bool IsFormalForm 
-        {
-            get { return isFormalForm; }
-        }
-
-
         protected string firstName;
         public string FirstName 
         { 
@@ -26,7 +19,6 @@ namespace PeopleAccounting.Staff
             set { firstName = value; }
         }
 
-        
         protected string lastName;
         public string LastName 
         { 
@@ -47,6 +39,12 @@ namespace PeopleAccounting.Staff
         {
             get { return isOnVacation; }
             set { isOnVacation = value; }
+        }
+        
+        protected bool isFormalForm = true;
+        public bool IsFormalForm 
+        {
+            get { return isFormalForm; }
         }
         #endregion
 
