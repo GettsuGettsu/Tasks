@@ -16,7 +16,9 @@ namespace PeopleAccountingWinForms
 {
     public partial class BaseForm : Form
     {
-        internal readonly University university1 = new University("FirstUniv");
+        internal readonly University university = new University("FirstUniv");
+        private bool isStaffOpened = false;
+        private bool isStudentOpened = false;
 
         public BaseForm()
         {
@@ -25,37 +27,46 @@ namespace PeopleAccountingWinForms
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            university1.AddEmployee(new Employee("Andre", "Croldan", new DateTime(1991, 03, 14), false, 400));
-            university1.AddEmployee(new Employee("Lena", "Hordan", new DateTime(1987, 11, 07), false, 450));
-            // 0 fName,
-            // 1 lName,
-            // 2 doBirth,
-            // 3 salary,
-            // 4 isOnVacation,
-            // 5 isFForm
-            // 6 isTeacher,
-            // 7 oClasses
-
-            // 0 oClasses,
-            // 1 salary,
-            // 2 isTeacher,
-            // 3 fName,
-            // 4 lName,
-            // 5 doBirth,
-            // 6 isOnVac            
-            // 7 isFormalForm,
-        }        
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            StaffForm staffForm = new StaffForm();
-            staffForm.Show(this);
+            university.AddEmployee(new Employee("Andre", "Croldan", new DateTime(1991, 03, 14), false, 400));
+            university.AddEmployee(new Employee("Lena", "Hordan", new DateTime(1987, 11, 07), false, 450));
+            university.AddTeacher(new Teacher("Alexander", "Sirrius", new DateTime(1985, 05, 13), true, 657, EducationalHelper.ClassTypes.Math | EducationalHelper.ClassTypes.Physics));
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        // need to prevent opening multiple windows
+        private void StaffButton_Click(object sender, EventArgs e)
         {
-            StudentsForm studentsForm = new StudentsForm();
-            studentsForm.Show(this);
+            if (!isStaffOpened)
+            {
+                isStaffOpened = true;
+                
+                StaffForm staffForm = new StaffForm();
+                staffForm.Show(this);
+
+                staffForm.FormClosed += StaffForm_FormClosed;
+            }
+        }
+
+        private void StaffForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            isStaffOpened = false;
+        }
+
+        private void StudentsButton_Click(object sender, EventArgs e)
+        {
+            if (!isStudentOpened)
+            {
+                isStudentOpened = true;
+                
+                StudentsForm studentsForm = new StudentsForm();
+                studentsForm.Show(this);
+
+                studentsForm.FormClosed += StudentsForm_FormClosed;
+            }
+        }
+
+        private void StudentsForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            isStudentOpened = false;
         }
     }
 }
