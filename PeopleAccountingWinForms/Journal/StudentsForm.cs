@@ -1,4 +1,5 @@
 ﻿using PeopleAccounting.Staff.Post;
+using PeopleAccountingWinForms.Journal.StudentsButtonForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -62,7 +63,8 @@ namespace PeopleAccountingWinForms
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-
+            EditForm addForm = new EditForm();
+            addForm.ShowDialog(this);
         }
 
         private void EditButton_Click(object sender, EventArgs e)
