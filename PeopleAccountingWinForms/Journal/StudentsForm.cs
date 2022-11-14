@@ -13,7 +13,7 @@ using System.Windows.Forms;
 namespace PeopleAccountingWinForms
 {
     public partial class StudentsForm : Form
-    {
+    {        
         public StudentsForm()
         {
             InitializeComponent();
@@ -63,7 +63,7 @@ namespace PeopleAccountingWinForms
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            EditForm addForm = new EditForm();
+            EditForm addForm = new EditForm(sender);
             addForm.ShowDialog(this);
         }
 

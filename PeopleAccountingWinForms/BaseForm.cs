@@ -30,15 +30,16 @@ namespace PeopleAccountingWinForms
             university.AddEmployee(new Employee("Andre", "Croldan", new DateTime(1991, 03, 14), false, 400));
             university.AddEmployee(new Employee("Lena", "Hordan", new DateTime(1987, 11, 07), false, 450));
             university.AddTeacher(new Teacher("Alexander", "Sirrius", new DateTime(1985, 05, 13), true, 657, EducationalHelper.ClassTypes.Math | EducationalHelper.ClassTypes.Physics));
+            university.AddStudent(new Student("Student1", "Student1", new DateTime(1999, 1, 1), false, EducationalHelper.ClassTypes.None));
         }
 
-        // need to prevent opening multiple windows
+        // TODO: buttons should call the same form with different logic (based on pressed button)
         private void StaffButton_Click(object sender, EventArgs e)
         {
             if (!isStaffOpened)
             {
                 isStaffOpened = true;
-                
+
                 StaffForm staffForm = new StaffForm();
                 staffForm.Show(this);
 
@@ -56,7 +57,7 @@ namespace PeopleAccountingWinForms
             if (!isStudentOpened)
             {
                 isStudentOpened = true;
-                
+
                 StudentsForm studentsForm = new StudentsForm();
                 studentsForm.Show(this);
 
