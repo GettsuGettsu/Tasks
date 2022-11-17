@@ -15,14 +15,17 @@ namespace PeopleAccountingWinForms.Journal.StudentsButtonForms
     {
         private bool isStudents = false;
         private bool isEdit = false;
+        private object sender;
+
         internal EditForm(object sender)
         {
+            this.sender = sender;
             InitializeComponent();            
         }
 
         private void EditForm_Load(object sender, EventArgs e)
         {
-            if ((sender as Button).Text == "Edit")
+            if ((this.sender as Button).Text == "Edit")
             {
                 isEdit = true;
                 DoEditPrepare();
@@ -31,7 +34,7 @@ namespace PeopleAccountingWinForms.Journal.StudentsButtonForms
 
         private void DoEditPrepare()
         {
-            var owner = this.Owner as StudentsForm;
+            var owner = this.Owner as StaffTableForm;
             DataGridView dataGridView = GetDataGrid(owner);            
             
             if (dataGridView == null)

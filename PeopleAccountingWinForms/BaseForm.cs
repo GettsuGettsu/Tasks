@@ -40,7 +40,7 @@ namespace PeopleAccountingWinForms
             {
                 isStaffOpened = true;
 
-                StaffForm staffForm = new StaffForm();
+                StaffTableForm staffForm = new StaffTableForm(university.Staff);
                 staffForm.Show(this);
 
                 staffForm.FormClosed += StaffForm_FormClosed;
@@ -58,7 +58,7 @@ namespace PeopleAccountingWinForms
             {
                 isStudentOpened = true;
 
-                StudentsForm studentsForm = new StudentsForm();
+                StaffTableForm studentsForm = new StaffTableForm(university.Students);
                 studentsForm.Show(this);
 
                 studentsForm.FormClosed += StudentsForm_FormClosed;

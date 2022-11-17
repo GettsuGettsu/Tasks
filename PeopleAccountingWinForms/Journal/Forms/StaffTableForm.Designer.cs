@@ -1,6 +1,6 @@
 ﻿namespace PeopleAccountingWinForms
 {
-    partial class StudentsForm
+    partial class StaffTableForm
     {
         /// <summary>
         /// Required designer variable.
@@ -112,7 +112,7 @@
             this.dataGridView1.Size = new System.Drawing.Size(1256, 678);
             this.dataGridView1.TabIndex = 3;
             // 
-            // StudentsForm
+            // StaffTableForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -125,7 +125,6 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "StudentsForm";
             this.Text = "StudentsForm";
-            this.Load += new System.EventHandler(this.StudentsForm_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);

@@ -52,10 +52,10 @@
     <Compile Include="BaseForm.Designer.cs">
       <DependentUpon>BaseForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Journal\StudentsButtonForms\EditForm.cs">
+    <Compile Include="Journal\Forms\EditForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Journal\StudentsButtonForms\EditForm.Designer.cs">
+    <Compile Include="Journal\Forms\EditForm.Designer.cs">
       <DependentUpon>EditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -66,11 +66,11 @@
     <Compile Include="Journal\StaffForm.Designer.cs">
       <DependentUpon>StaffForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Journal\StudentsForm.cs">
+    <Compile Include="Journal\Forms\StaffTableForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Journal\StudentsForm.Designer.cs">
-      <DependentUpon>StudentsForm.cs</DependentUpon>
+    <Compile Include="Journal\Forms\StaffTableForm.Designer.cs">
+      <DependentUpon>StaffTableForm.cs</DependentUpon>
     </Compile>
     <Compile Include="University\Staff\Human.cs" />
     <Compile Include="University\Staff\Post\EducationalHelper.cs" />
@@ -82,7 +82,7 @@
     <EmbeddedResource Include="BaseForm.resx">
       <DependentUpon>BaseForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Journal\StudentsButtonForms\EditForm.resx">
+    <EmbeddedResource Include="Journal\Forms\EditForm.resx">
       <DependentUpon>EditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -97,8 +97,8 @@
     <EmbeddedResource Include="Journal\StaffForm.resx">
       <DependentUpon>StaffForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Journal\StudentsForm.resx">
-      <DependentUpon>StudentsForm.cs</DependentUpon>
+    <EmbeddedResource Include="Journal\Forms\StaffTableForm.resx">
+      <DependentUpon>StaffTableForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -114,7 +114,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Journal\StaffButtonForms\" />
+    <Folder Include="Journal\StudentsButtonForms\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
