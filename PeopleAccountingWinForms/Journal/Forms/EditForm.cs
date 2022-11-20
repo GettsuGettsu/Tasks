@@ -1,4 +1,5 @@
 ﻿using PeopleAccounting.Staff;
+using PeopleAccounting.Staff.Post;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,28 +16,26 @@ namespace PeopleAccountingWinForms.Journal.StudentsButtonForms
     {
         private bool isStudents = false;
         private bool isEdit = false;
-        private object sender;
 
-        internal EditForm(object sender)
+        internal EditForm(bool isStudents, bool isEdit, object human = null)
         {
-            this.sender = sender;
-            InitializeComponent();            
+            InitializeComponent();
+
+            this.isStudents = isStudents;
+            this.isEdit = isEdit;
         }
 
         private void EditForm_Load(object sender, EventArgs e)
         {
-            if ((this.sender as Button).Text == "Edit")
-            {
-                isEdit = true;
+            if (isEdit)
                 DoEditPrepare();
-            }
         }
 
         private void DoEditPrepare()
         {
             var owner = this.Owner as StaffTableForm;
-            DataGridView dataGridView = GetDataGrid(owner);            
-            
+            DataGridView dataGridView = GetDataGrid(owner);
+
             if (dataGridView == null)
             {
                 MessageBox.Show("Error!");
@@ -74,13 +73,27 @@ namespace PeopleAccountingWinForms.Journal.StudentsButtonForms
 
         private void ok_button_Click(object sender, EventArgs e)
         {
-
+            if (isStudents)
+            {
+                BaseForm.university.AddStudent(new Student(firstName_textBox.Text, lastName_textBox.Text, dateOfBirth_dateTimePicker.Value,
+                    isOnVacation_checkBox.Checked, optionalClasses_textBox.Text));
+            }
+            else if (isTeacher_checkBox.Checked)
+            {
+                BaseForm.university.AddTeacher(new Teacher(firstName_textBox.Text, lastName_textBox.Text, dateOfBirth_dateTimePicker.Value,
+                    isOnVacation_checkBox.Checked, (double)salary_numericUpDown.Value, optionalClasses_textBox.Text));
+            }
+            else
+            {
+                BaseForm.university.AddEmployee(new Employee(firstName_textBox.Text, lastName_textBox.Text, dateOfBirth_dateTimePicker.Value,
+                    isOnVacation_checkBox.Checked, (double)salary_numericUpDown.Value));
+            }
+            this.Close();
         }
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
         {
-            optionalClasses_label.Visible = isTeacher_checkBox.Checked;
-            optionalClasses_textBox.Visible = isTeacher_checkBox.Checked;
-        }        
+            optionalClasses_panel.Visible = isTeacher_checkBox.Checked;
+        }
     }
 }

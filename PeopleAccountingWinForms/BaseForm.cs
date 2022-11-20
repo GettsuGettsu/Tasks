@@ -16,7 +16,7 @@ namespace PeopleAccountingWinForms
 {
     public partial class BaseForm : Form
     {
-        internal readonly University university = new University("FirstUniv");
+        public static readonly University university = new University("FirstUniv");
         private bool isStaffOpened = false;
         private bool isStudentOpened = false;
 

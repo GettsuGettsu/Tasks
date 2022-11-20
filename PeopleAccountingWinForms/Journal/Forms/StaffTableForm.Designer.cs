@@ -40,8 +40,8 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.remove_button);
-            this.panel1.Controls.Add(this.edit_button);
             this.panel1.Controls.Add(this.add_button);
+            this.panel1.Controls.Add(this.edit_button);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 624);
             this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -55,10 +55,10 @@
             this.remove_button.FlatAppearance.BorderSize = 0;
             this.remove_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.remove_button.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.remove_button.Location = new System.Drawing.Point(714, 5);
+            this.remove_button.Location = new System.Drawing.Point(1131, 7);
             this.remove_button.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.remove_button.Name = "remove_button";
-            this.remove_button.Size = new System.Drawing.Size(153, 45);
+            this.remove_button.Size = new System.Drawing.Size(118, 40);
             this.remove_button.TabIndex = 0;
             this.remove_button.Text = "Remove";
             this.remove_button.UseVisualStyleBackColor = false;
@@ -70,10 +70,10 @@
             this.edit_button.FlatAppearance.BorderSize = 0;
             this.edit_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.edit_button.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.edit_button.Location = new System.Drawing.Point(552, 5);
+            this.edit_button.Location = new System.Drawing.Point(133, 7);
             this.edit_button.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.edit_button.Name = "edit_button";
-            this.edit_button.Size = new System.Drawing.Size(153, 45);
+            this.edit_button.Size = new System.Drawing.Size(118, 40);
             this.edit_button.TabIndex = 0;
             this.edit_button.Text = "Edit";
             this.edit_button.UseVisualStyleBackColor = false;
@@ -85,10 +85,10 @@
             this.add_button.FlatAppearance.BorderSize = 0;
             this.add_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.add_button.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.add_button.Location = new System.Drawing.Point(390, 5);
+            this.add_button.Location = new System.Drawing.Point(7, 7);
             this.add_button.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.add_button.Name = "add_button";
-            this.add_button.Size = new System.Drawing.Size(153, 45);
+            this.add_button.Size = new System.Drawing.Size(118, 40);
             this.add_button.TabIndex = 0;
             this.add_button.Text = "Add";
             this.add_button.UseVisualStyleBackColor = false;
@@ -123,7 +123,7 @@
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "StudentsForm";
+            this.Name = "StaffTableForm";
             this.Text = "StudentsForm";
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

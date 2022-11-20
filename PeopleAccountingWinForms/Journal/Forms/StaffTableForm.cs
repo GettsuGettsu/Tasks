@@ -1,4 +1,6 @@
-﻿using PeopleAccounting.Staff.Post;
+﻿using PeopleAccounting.Staff;
+using PeopleAccounting.Staff.Post;
+using PeopleAccountingWinForms.Journal.Helpers;
 using PeopleAccountingWinForms.Journal.StudentsButtonForms;
 using System;
 using System.Collections.Generic;
@@ -15,6 +17,7 @@ namespace PeopleAccountingWinForms
     public partial class StaffTableForm : Form
     {
         private DataTable staffTable = new DataTable();
+        private bool isStudents = false;
 
         public StaffTableForm(List<Employee> employeeList)
         {
@@ -25,21 +28,57 @@ namespace PeopleAccountingWinForms
         }
         public StaffTableForm(List<Student> studentList)
         {
-            InitializeComponent();            
+            InitializeComponent();
 
+            this.isStudents = true;
             CreateStudentTable(staffTable, studentList);
             dataGridView1.DataSource = staffTable;
         }
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            EditForm addForm = new EditForm(sender);
+            EditForm addForm = new EditForm(isStudents, false);
             addForm.ShowDialog(this);
+
+            staffTable.Clear();
+            if (isStudents)
+                CreateStudentTable(staffTable, BaseForm.university.Students);
+            else
+                CreateEmployeeTable(staffTable, BaseForm.university.Staff);
         }
 
         private void EditButton_Click(object sender, EventArgs e)
         {
+            object human;
 
+            DataGridViewRow selectedRow;
+            if (dataGridView1.SelectedRows.Count != 0)
+                selectedRow = dataGridView1.SelectedRows[0];
+            else
+            {
+                FormsHelper.ShowError("No selected rows!");
+                return;
+            }
+
+            var cells = selectedRow.Cells;
+            if (isStudents)
+            {
+                human = new Student((string)cells[0].Value, (string)cells[1].Value, (DateTime)cells[2].Value,
+                    (bool)cells[3].Value, (EducationalHelper.ClassTypes)cells[5].Value);
+            }
+            else if ((bool)cells["Is teacher"].Value)
+            {
+                human = new Teacher((string)cells[0].Value, (string)cells[1].Value, (DateTime)cells[2].Value,
+                    (bool)cells[4].Value, (double)cells[3].Value, (EducationalHelper.ClassTypes)cells[7].Value);
+            }
+            else
+            {
+                human = new Employee((string)cells[0].Value, (string)cells[1].Value, (DateTime)cells[2].Value,
+                    (bool)cells[4].Value, (double)cells[3].Value);
+            }
+
+            EditForm addForm = new EditForm(isStudents, true, human);
+            addForm.ShowDialog(this);
         }
 
         private void RemoveButton_Click(object sender, EventArgs e)
@@ -133,7 +172,7 @@ namespace PeopleAccountingWinForms
                     item.DateOfBirth, item.IsOnVacation,
                     item.IsFormalForm, item.OptionalClasses);
             }
-        }        
+        }
         #endregion
     }
 }
