@@ -16,35 +16,33 @@ namespace PeopleAccountingWinForms
 {
     public partial class StaffTableForm : Form
     {
+        #region Fields
         private DataTable staffTable = new DataTable();
         private bool isStudents = false;
+        #endregion
 
-        public StaffTableForm(List<Employee> employeeList)
+        #region Constructors
+        public StaffTableForm(bool isStudents)
         {
             InitializeComponent();
 
-            CreateEmployeeTable(staffTable, employeeList);
-            dataGridView1.DataSource = staffTable;
-        }
-        public StaffTableForm(List<Student> studentList)
-        {
-            InitializeComponent();
+            dataGridView1.RowHeadersWidth = dataGridView1.ColumnHeadersHeight;
 
-            this.isStudents = true;
-            CreateStudentTable(staffTable, studentList);
-            dataGridView1.DataSource = staffTable;
+            this.isStudents = isStudents;
+            CreateDataGridView();
         }
+        #endregion
 
+        #region Form events
         private void AddButton_Click(object sender, EventArgs e)
         {
             EditForm addForm = new EditForm(isStudents, false);
-            addForm.ShowDialog(this);
+            var result = addForm.ShowDialog(this);
 
-            staffTable.Clear();
-            if (isStudents)
-                CreateStudentTable(staffTable, BaseForm.university.Students);
-            else
-                CreateEmployeeTable(staffTable, BaseForm.university.Staff);
+            if (result == DialogResult.OK)
+            {
+                CreateDataGridView();
+            }
         }
 
         private void EditButton_Click(object sender, EventArgs e)
@@ -63,18 +61,18 @@ namespace PeopleAccountingWinForms
             var cells = selectedRow.Cells;
             if (isStudents)
             {
-                human = new Student((string)cells[0].Value, (string)cells[1].Value, (DateTime)cells[2].Value,
-                    (bool)cells[3].Value, (EducationalHelper.ClassTypes)cells[5].Value);
+                human = new Student((string)cells[1].Value, (string)cells[2].Value, (DateTime)cells[3].Value,
+                    (bool)cells[4].Value, (EducationalHelper.ClassTypes)cells[6].Value);
             }
             else if ((bool)cells["Is teacher"].Value)
             {
-                human = new Teacher((string)cells[0].Value, (string)cells[1].Value, (DateTime)cells[2].Value,
-                    (bool)cells[4].Value, (double)cells[3].Value, (EducationalHelper.ClassTypes)cells[7].Value);
+                human = new Teacher((string)cells[1].Value, (string)cells[2].Value, (DateTime)cells[3].Value,
+                    (double)cells[4].Value, (bool)cells[5].Value, (EducationalHelper.ClassTypes)cells[8].Value);
             }
             else
             {
-                human = new Employee((string)cells[0].Value, (string)cells[1].Value, (DateTime)cells[2].Value,
-                    (bool)cells[4].Value, (double)cells[3].Value);
+                human = new Employee((string)cells[1].Value, (string)cells[2].Value, (DateTime)cells[3].Value,
+                    (double)cells[4].Value, (bool)cells[5].Value);
             }
 
             EditForm addForm = new EditForm(isStudents, true, human);
@@ -83,94 +81,96 @@ namespace PeopleAccountingWinForms
 
         private void RemoveButton_Click(object sender, EventArgs e)
         {
+            var selectedRows = dataGridView1.SelectedRows;
+            foreach (DataGridViewRow row in selectedRows)
+            {
+                if (isStudents)
+                {
+                    var student = BaseForm.university.Students.FirstOrDefault(member => (Guid)row.Cells[0].Value == member.Id);
+                    BaseForm.university.Students.Remove(student);
+                }
+                else
+                {
+                    var staff = BaseForm.university.Staff.FirstOrDefault(member => (Guid)row.Cells[0].Value == member.Id);
+                    BaseForm.university.Staff.Remove(staff);
+                }
+            }
 
+            CreateDataGridView();           
         }
+        #endregion
 
         #region Methods
-        internal void CreateEmployeeTable(DataTable table, List<Employee> employeeList)
+        private void CreateDataGridView()
         {
-            AddEmployeeColumns(table);
-            AddEmployeeRows(table, employeeList);
+            staffTable.Clear();
+            CreateTable(staffTable);
+
+            dataGridView1.DataSource = staffTable;
+            dataGridView1.Columns[0].Visible = false;
         }
 
-        internal void CreateStudentTable(DataTable table, List<Student> studentList)
+        private void CreateTable(DataTable table)
         {
-            AddStudentColumns(table);
-            AddStudentRows(table, studentList);
+            AddColumns(table);
+            AddRows(table);
         }
 
-        private void AddEmployeeColumns(DataTable table)
+        private void AddColumns(DataTable table)
         {
             if (table.Columns.Count > 0)
                 return;
 
-            //Teacher teacherColumns = new Teacher();
-
-            DataColumn[] columns = {
+            List<DataColumn> columns = new List<DataColumn>() {
+                new DataColumn("ID", typeof(Guid)),
                 new DataColumn("First name", typeof(string)),
                 new DataColumn("Last name", typeof(string)),
                 new DataColumn("Date of birth", typeof(DateTime)),
-                new DataColumn("Salary", typeof(double)),
                 new DataColumn("Is on vacation", typeof(bool)),
                 new DataColumn("Is formal form", typeof(bool)),
-                new DataColumn("Is teacher", typeof(bool)),
                 new DataColumn("Optional classes", typeof(EducationalHelper.ClassTypes)),
             };
 
-            table.Columns.AddRange(columns);
-        }
-
-        private void AddEmployeeRows(DataTable table, List<Employee> employeeList)
-        {
-            if (table.Columns.Count == 0)
-                throw new Exception("DataTable has no columns!");
-
-            foreach (var item in employeeList) // (this.Owner as BaseForm).university.Staff)
+            if (!isStudents)
             {
-                EducationalHelper.ClassTypes? optionalClasses = null;
-
-                try
-                {
-                    optionalClasses = (item as Teacher).OptionalClasses;
-                }
-                catch { }
-
-                table.Rows.Add(item.FirstName, item.LastName,
-                    item.DateOfBirth, item.Salary,
-                    item.IsOnVacation, item.IsFormalForm,
-                    item.IsTeacher, optionalClasses);
+                columns.Insert(4, new DataColumn("Salary", typeof(double)));
+                columns.Insert(columns.Count - 2, new DataColumn("Is teacher", typeof(bool)));
             }
+
+            table.Columns.AddRange(columns.ToArray());
         }
 
-        private void AddStudentColumns(DataTable table)
-        {
-            if (table.Columns.Count > 0)
-                return;
-
-            //Teacher teacherColumns = new Teacher();
-
-            DataColumn[] columns = {
-                new DataColumn("First name", typeof(string)),
-                new DataColumn("Last name", typeof(string)),
-                new DataColumn("Date of birth", typeof(DateTime)),
-                new DataColumn("Is on vacation", typeof(bool)),
-                new DataColumn("Is formal form", typeof(bool)),
-                new DataColumn("Optional classes", typeof(EducationalHelper.ClassTypes)),
-            };
-
-            table.Columns.AddRange(columns);
-        }
-
-        private void AddStudentRows(DataTable table, List<Student> studentList)
+        private void AddRows(DataTable table)
         {
             if (table.Columns.Count == 0)
                 throw new Exception("DataTable has no columns!");
 
-            foreach (var item in studentList) // (this.Owner as BaseForm).university.Students)
+            if (isStudents)
             {
-                table.Rows.Add(item.FirstName, item.LastName,
-                    item.DateOfBirth, item.IsOnVacation,
-                    item.IsFormalForm, item.OptionalClasses);
+                foreach (var item in BaseForm.university.Students) // staffList as List<Student>)
+                {
+                    table.Rows.Add(item.Id, item.FirstName, item.LastName,
+                        item.DateOfBirth, item.IsOnVacation,
+                        item.IsFormalForm, item.OptionalClasses);
+                }
+            }
+            else
+            {
+                foreach (var item in BaseForm.university.Staff) // staffList as List<Employee>)
+                {
+                    EducationalHelper.ClassTypes? optionalClasses = null;
+
+                    try
+                    {
+                        optionalClasses = (item as Teacher).OptionalClasses;
+                    }
+                    catch { }
+
+                    table.Rows.Add(item.Id, item.FirstName, item.LastName,
+                        item.DateOfBirth, item.Salary,
+                        item.IsOnVacation, item.IsFormalForm,
+                        item.IsTeacher, optionalClasses);
+                }
             }
         }
         #endregion

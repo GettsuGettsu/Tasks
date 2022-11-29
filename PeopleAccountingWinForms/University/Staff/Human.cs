@@ -7,19 +7,16 @@ using System.Threading.Tasks;
 namespace PeopleAccounting.Staff
 {
     public class Human
-    {
-        #region Fields
-        #endregion
-
+    {        
         #region Properties
-        protected string firstName;
+        private string firstName;
         public string FirstName 
         { 
             get { return firstName; }
             set { firstName = value; }
         }
 
-        protected string lastName;
+        private string lastName;
         public string LastName 
         { 
             get { return lastName; }
@@ -27,44 +24,35 @@ namespace PeopleAccounting.Staff
         }
 
         
-        protected DateTime dateOfBirth;
+        private DateTime dateOfBirth;
         public DateTime DateOfBirth
         {
             get { return dateOfBirth; }
             set { dateOfBirth = value; }
         }
 
-        protected bool isOnVacation;
+        private bool isOnVacation;
         public bool IsOnVacation
         {
             get { return isOnVacation; }
             set { isOnVacation = value; }
         }
         
-        protected bool isFormalForm = true;
+        private bool isFormalForm = true;
         public bool IsFormalForm 
         {
             get { return isFormalForm; }
+            protected set { isFormalForm = value; }
+        }
+
+        private Guid id;
+        public Guid Id
+        {
+            get { return id; }
         }
         #endregion
 
         #region Methods
-        /*public static string[] GetBaseInfo()
-        {
-            string[] baseInfo = new string[3];
-
-            UniversityHelper.WriteMessage("\nEnter first name: ", false);
-            baseInfo[0] = UniversityHelper.GetConsoleString();
-
-            UniversityHelper.WriteMessage("Enter last name: ", false);
-            baseInfo[1] = UniversityHelper.GetConsoleString();
-
-            UniversityHelper.WriteMessage("Enter date of birth: ", false);
-            baseInfo[2] = UniversityHelper.GetConsoleString();
-
-            return baseInfo;
-        }*/
-
         public void FillBaseInfo(string firstName, string lastName, DateTime dateOfBirth)
         {
             this.firstName = firstName;
@@ -81,6 +69,7 @@ namespace PeopleAccounting.Staff
             this.lastName = lastName;
             this.dateOfBirth = dateOfBirth;
             this.isOnVacation = isOnVacation;
+            this.id = Guid.NewGuid();
         }
     }
 }

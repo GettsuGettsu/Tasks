@@ -27,6 +27,12 @@ namespace PeopleAccountingWinForms.Journal.StudentsButtonForms
 
         private void EditForm_Load(object sender, EventArgs e)
         {
+            if (isStudents)
+            {
+                salary_panel.Visible = false;
+                teacherPanel_panel.Visible = false;
+                optionalClasses_panel.Visible = true;
+            }
             if (isEdit)
                 DoEditPrepare();
         }
@@ -42,7 +48,7 @@ namespace PeopleAccountingWinForms.Journal.StudentsButtonForms
                 Close();
             }
 
-            GetSelectedLine(dataGridView);
+            GetSelectedRows(dataGridView);
 
             //dataGridView.SelectedRows[0].Cells[0]. DataSource = dataGridView.Rows;
         }
@@ -61,34 +67,70 @@ namespace PeopleAccountingWinForms.Journal.StudentsButtonForms
             return dataGridView;
         }
 
-        private void GetSelectedLine(DataGridView dataGridView)
+        private void GetSelectedRows(DataGridView dataGridView)
         {
-            var selectedCells = dataGridView.SelectedCells;
+            var selectedRows = dataGridView.SelectedRows;
+
+            foreach (DataGridViewRow row in selectedRows)
+            {
+                //row
+            }
+            //selectedRows[0].Cells
+            /*var selectedCells = dataGridView.SelectedCells;
             //var dataTable = this.Controls["data_TableLayoutPanel"] as TableLayoutPanel;
             firstName_textBox.Text = (string)selectedCells[0].Value;
             lastName_textBox.Text = (string)selectedCells[1].Value;
-            dateOfBirth_dateTimePicker.Value = (DateTime)selectedCells[2].Value;
-
+            dateOfBirth_dateTimePicker.Value = (DateTime)selectedCells[2].Value;*/
         }
 
         private void ok_button_Click(object sender, EventArgs e)
         {
+            if (!isEdit)
+                AddHuman();
+            else
+                EditHuman();
+
+            //return DialogResult.OK;            
+            this.Close();
+        }
+
+        private void AddHuman()
+        {
             if (isStudents)
             {
-                BaseForm.university.AddStudent(new Student(firstName_textBox.Text, lastName_textBox.Text, dateOfBirth_dateTimePicker.Value,
-                    isOnVacation_checkBox.Checked, optionalClasses_textBox.Text));
+                AddStudent(); 
             }
             else if (isTeacher_checkBox.Checked)
             {
-                BaseForm.university.AddTeacher(new Teacher(firstName_textBox.Text, lastName_textBox.Text, dateOfBirth_dateTimePicker.Value,
-                    isOnVacation_checkBox.Checked, (double)salary_numericUpDown.Value, optionalClasses_textBox.Text));
+                AddTeacher(); 
             }
             else
             {
-                BaseForm.university.AddEmployee(new Employee(firstName_textBox.Text, lastName_textBox.Text, dateOfBirth_dateTimePicker.Value,
-                    isOnVacation_checkBox.Checked, (double)salary_numericUpDown.Value));
+                AddEmployee(); 
             }
-            this.Close();
+        }
+
+        private void AddStudent()
+        {
+            BaseForm.university.AddStudent(new Student(firstName_textBox.Text, lastName_textBox.Text, dateOfBirth_dateTimePicker.Value.Date,
+                    isOnVacation_checkBox.Checked, optionalClasses_textBox.Text));
+        }
+
+        private void AddTeacher()
+        {
+            BaseForm.university.AddTeacher(new Teacher(firstName_textBox.Text, lastName_textBox.Text, dateOfBirth_dateTimePicker.Value.Date,
+                    (double)salary_numericUpDown.Value, isOnVacation_checkBox.Checked, optionalClasses_textBox.Text));
+        }
+
+        private void AddEmployee()
+        {
+            BaseForm.university.AddEmployee(new Employee(firstName_textBox.Text, lastName_textBox.Text, dateOfBirth_dateTimePicker.Value.Date,
+                    (double)salary_numericUpDown.Value, isOnVacation_checkBox.Checked));
+        }
+
+        private void EditHuman()
+        {
+            throw new NotImplementedException();
         }
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)

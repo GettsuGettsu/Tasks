@@ -30,8 +30,8 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.remove_button = new System.Windows.Forms.Button();
-            this.edit_button = new System.Windows.Forms.Button();
             this.add_button = new System.Windows.Forms.Button();
+            this.edit_button = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -64,21 +64,6 @@
             this.remove_button.UseVisualStyleBackColor = false;
             this.remove_button.Click += new System.EventHandler(this.RemoveButton_Click);
             // 
-            // edit_button
-            // 
-            this.edit_button.BackColor = System.Drawing.Color.Gray;
-            this.edit_button.FlatAppearance.BorderSize = 0;
-            this.edit_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.edit_button.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.edit_button.Location = new System.Drawing.Point(133, 7);
-            this.edit_button.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edit_button.Name = "edit_button";
-            this.edit_button.Size = new System.Drawing.Size(118, 40);
-            this.edit_button.TabIndex = 0;
-            this.edit_button.Text = "Edit";
-            this.edit_button.UseVisualStyleBackColor = false;
-            this.edit_button.Click += new System.EventHandler(this.EditButton_Click);
-            // 
             // add_button
             // 
             this.add_button.BackColor = System.Drawing.Color.Gray;
@@ -94,6 +79,21 @@
             this.add_button.UseVisualStyleBackColor = false;
             this.add_button.Click += new System.EventHandler(this.AddButton_Click);
             // 
+            // edit_button
+            // 
+            this.edit_button.BackColor = System.Drawing.Color.Gray;
+            this.edit_button.FlatAppearance.BorderSize = 0;
+            this.edit_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.edit_button.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.edit_button.Location = new System.Drawing.Point(133, 7);
+            this.edit_button.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.edit_button.Name = "edit_button";
+            this.edit_button.Size = new System.Drawing.Size(118, 40);
+            this.edit_button.TabIndex = 0;
+            this.edit_button.Text = "Edit";
+            this.edit_button.UseVisualStyleBackColor = false;
+            this.edit_button.Click += new System.EventHandler(this.EditButton_Click);
+            // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
@@ -106,7 +106,7 @@
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 82;
+            this.dataGridView1.RowHeadersWidth = 33;
             this.dataGridView1.RowTemplate.Height = 33;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1256, 678);

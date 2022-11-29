@@ -29,18 +29,18 @@
         private void InitializeComponent()
         {
             this.buttons_panel = new System.Windows.Forms.Panel();
+            this.cancel_button = new System.Windows.Forms.Button();
+            this.ok_button = new System.Windows.Forms.Button();
             this.isFormalForm_checkBox = new System.Windows.Forms.CheckBox();
             this.isTeacher_checkBox = new System.Windows.Forms.CheckBox();
             this.optionalClasses_textBox = new System.Windows.Forms.TextBox();
             this.salary_numericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.cancel_button = new System.Windows.Forms.Button();
             this.isOnVacation_checkBox = new System.Windows.Forms.CheckBox();
             this.optionalClasses_label = new System.Windows.Forms.Label();
             this.isTeacher_label = new System.Windows.Forms.Label();
             this.salary_label = new System.Windows.Forms.Label();
             this.isOnVacation_label = new System.Windows.Forms.Label();
             this.isFormalForm_label = new System.Windows.Forms.Label();
-            this.ok_button = new System.Windows.Forms.Button();
             this.dateOfBirth_label = new System.Windows.Forms.Label();
             this.lastName_textBox = new System.Windows.Forms.TextBox();
             this.lastName_label = new System.Windows.Forms.Label();
@@ -67,26 +67,61 @@
             // 
             this.buttons_panel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.buttons_panel.Controls.Add(this.cancel_button);
+            this.buttons_panel.Controls.Add(this.isFormalForm_checkBox);
             this.buttons_panel.Controls.Add(this.ok_button);
+            this.buttons_panel.Controls.Add(this.isFormalForm_label);
             this.buttons_panel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.buttons_panel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttons_panel.Location = new System.Drawing.Point(0, 373);
+            this.buttons_panel.Location = new System.Drawing.Point(0, 318);
             this.buttons_panel.Name = "buttons_panel";
             this.buttons_panel.Size = new System.Drawing.Size(516, 91);
             this.buttons_panel.TabIndex = 0;
+            // 
+            // cancel_button
+            // 
+            this.cancel_button.BackColor = System.Drawing.Color.Gray;
+            this.cancel_button.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.cancel_button.FlatAppearance.BorderSize = 0;
+            this.cancel_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cancel_button.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.cancel_button.Location = new System.Drawing.Point(387, 44);
+            this.cancel_button.Name = "cancel_button";
+            this.cancel_button.Size = new System.Drawing.Size(118, 40);
+            this.cancel_button.TabIndex = 0;
+            this.cancel_button.Text = "Cancel";
+            this.cancel_button.UseVisualStyleBackColor = false;
+            // 
+            // ok_button
+            // 
+            this.ok_button.BackColor = System.Drawing.SystemColors.Highlight;
+            this.ok_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.ok_button.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.ok_button.FlatAppearance.BorderSize = 0;
+            this.ok_button.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.HotTrack;
+            this.ok_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ok_button.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.ok_button.Location = new System.Drawing.Point(263, 44);
+            this.ok_button.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ok_button.Name = "ok_button";
+            this.ok_button.Size = new System.Drawing.Size(118, 40);
+            this.ok_button.TabIndex = 0;
+            this.ok_button.Text = "OK";
+            this.ok_button.UseVisualStyleBackColor = false;
+            this.ok_button.Click += new System.EventHandler(this.ok_button_Click);
             // 
             // isFormalForm_checkBox
             // 
             this.isFormalForm_checkBox.AutoSize = true;
             this.isFormalForm_checkBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.isFormalForm_checkBox.ForeColor = System.Drawing.Color.White;
-            this.isFormalForm_checkBox.Location = new System.Drawing.Point(260, 50);
+            this.isFormalForm_checkBox.Location = new System.Drawing.Point(259, 3);
             this.isFormalForm_checkBox.Name = "isFormalForm_checkBox";
             this.isFormalForm_checkBox.Size = new System.Drawing.Size(43, 29);
             this.isFormalForm_checkBox.TabIndex = 11;
             this.isFormalForm_checkBox.Text = " ";
             this.isFormalForm_checkBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.isFormalForm_checkBox.UseVisualStyleBackColor = true;
+            this.isFormalForm_checkBox.Visible = false;
             // 
             // isTeacher_checkBox
             // 
@@ -126,20 +161,6 @@
             this.salary_numericUpDown.Size = new System.Drawing.Size(244, 30);
             this.salary_numericUpDown.TabIndex = 7;
             this.salary_numericUpDown.ThousandsSeparator = true;
-            // 
-            // cancel_button
-            // 
-            this.cancel_button.BackColor = System.Drawing.Color.Gray;
-            this.cancel_button.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancel_button.FlatAppearance.BorderSize = 0;
-            this.cancel_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cancel_button.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.cancel_button.Location = new System.Drawing.Point(387, 44);
-            this.cancel_button.Name = "cancel_button";
-            this.cancel_button.Size = new System.Drawing.Size(118, 40);
-            this.cancel_button.TabIndex = 0;
-            this.cancel_button.Text = "Cancel";
-            this.cancel_button.UseVisualStyleBackColor = false;
             // 
             // isOnVacation_checkBox
             // 
@@ -202,29 +223,13 @@
             // 
             this.isFormalForm_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.isFormalForm_label.ForeColor = System.Drawing.Color.White;
-            this.isFormalForm_label.Location = new System.Drawing.Point(12, 51);
+            this.isFormalForm_label.Location = new System.Drawing.Point(11, -1);
             this.isFormalForm_label.Name = "isFormalForm_label";
             this.isFormalForm_label.Size = new System.Drawing.Size(244, 33);
             this.isFormalForm_label.TabIndex = 10;
             this.isFormalForm_label.Text = "Formal form";
             this.isFormalForm_label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // ok_button
-            // 
-            this.ok_button.BackColor = System.Drawing.SystemColors.Highlight;
-            this.ok_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ok_button.FlatAppearance.BorderSize = 0;
-            this.ok_button.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.HotTrack;
-            this.ok_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ok_button.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.ok_button.Location = new System.Drawing.Point(263, 44);
-            this.ok_button.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.ok_button.Name = "ok_button";
-            this.ok_button.Size = new System.Drawing.Size(118, 40);
-            this.ok_button.TabIndex = 0;
-            this.ok_button.Text = "OK";
-            this.ok_button.UseVisualStyleBackColor = false;
-            this.ok_button.Click += new System.EventHandler(this.ok_button_Click);
+            this.isFormalForm_label.Visible = false;
             // 
             // dateOfBirth_label
             // 
@@ -322,13 +327,11 @@
             // vacationForm_panel
             // 
             this.vacationForm_panel.Controls.Add(this.isOnVacation_label);
-            this.vacationForm_panel.Controls.Add(this.isFormalForm_checkBox);
             this.vacationForm_panel.Controls.Add(this.isOnVacation_checkBox);
-            this.vacationForm_panel.Controls.Add(this.isFormalForm_label);
             this.vacationForm_panel.Dock = System.Windows.Forms.DockStyle.Top;
             this.vacationForm_panel.Location = new System.Drawing.Point(0, 183);
             this.vacationForm_panel.Name = "vacationForm_panel";
-            this.vacationForm_panel.Size = new System.Drawing.Size(516, 86);
+            this.vacationForm_panel.Size = new System.Drawing.Size(516, 43);
             this.vacationForm_panel.TabIndex = 8;
             // 
             // teacherPanel_panel
@@ -336,7 +339,7 @@
             this.teacherPanel_panel.Controls.Add(this.isTeacher_checkBox);
             this.teacherPanel_panel.Controls.Add(this.isTeacher_label);
             this.teacherPanel_panel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.teacherPanel_panel.Location = new System.Drawing.Point(0, 269);
+            this.teacherPanel_panel.Location = new System.Drawing.Point(0, 226);
             this.teacherPanel_panel.Name = "teacherPanel_panel";
             this.teacherPanel_panel.Size = new System.Drawing.Size(516, 43);
             this.teacherPanel_panel.TabIndex = 9;
@@ -346,7 +349,7 @@
             this.optionalClasses_panel.Controls.Add(this.optionalClasses_label);
             this.optionalClasses_panel.Controls.Add(this.optionalClasses_textBox);
             this.optionalClasses_panel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.optionalClasses_panel.Location = new System.Drawing.Point(0, 312);
+            this.optionalClasses_panel.Location = new System.Drawing.Point(0, 269);
             this.optionalClasses_panel.Name = "optionalClasses_panel";
             this.optionalClasses_panel.Size = new System.Drawing.Size(516, 44);
             this.optionalClasses_panel.TabIndex = 10;
@@ -360,7 +363,7 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.CancelButton = this.cancel_button;
-            this.ClientSize = new System.Drawing.Size(516, 464);
+            this.ClientSize = new System.Drawing.Size(516, 409);
             this.Controls.Add(this.buttons_panel);
             this.Controls.Add(this.optionalClasses_panel);
             this.Controls.Add(this.teacherPanel_panel);
@@ -379,6 +382,7 @@
             this.Text = "EditForm";
             this.Load += new System.EventHandler(this.EditForm_Load);
             this.buttons_panel.ResumeLayout(false);
+            this.buttons_panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.salary_numericUpDown)).EndInit();
             this.names_panel.ResumeLayout(false);
             this.names_panel.PerformLayout();

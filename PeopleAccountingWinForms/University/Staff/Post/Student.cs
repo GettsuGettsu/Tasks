@@ -9,9 +9,6 @@ namespace PeopleAccounting.Staff.Post
 {
     public class Student : Human
     {
-        #region Fields
-        #endregion
-
         #region Properties
         private ClassTypes optionalClasses = ClassTypes.None;
         public ClassTypes OptionalClasses
@@ -21,64 +18,26 @@ namespace PeopleAccounting.Staff.Post
         }
         #endregion
 
-        #region Methods
-        //internal static Student Add(Human human, bool isOnVacation, string optionalClasses)
-        //{
-        //    return Add2(human.FirstName, human.LastName, human.DateOfBirth, isOnVacation, EducationalHelper.ToOptionalClasses(optionalClasses));
-        //}
-        
-        //internal static Student Add(Human human, bool isOnVacation, ClassTypes optionalClasses)
-        //{
-        //    return Add2(human.FirstName, human.LastName, human.DateOfBirth, isOnVacation, optionalClasses);
-        //}
-
-        ////internal static Student Add(string firstName, string lastName, string dateOfBirth, bool isOnVacation, string optionalClasses)
-        ////{
-        ////    return Add2(firstName, lastName, dateOfBirth, isOnVacation, EducationalHelper.ToOptionalClasses(optionalClasses));
-        ////}
-
-        //internal static Student Add(string firstName, string lastName, string dateOfBirth, bool isOnVacation, ClassTypes optionalClasses)
-        //{
-        //    return Add2(firstName, lastName, dateOfBirth, isOnVacation, optionalClasses);
-        //}
-
-        //internal static Student Add2(string firstName, string lastName, string dateOfBirth, bool isOnVacation, ClassTypes optionalClasses)
-        //{
-        //    Student student = new Student();
-
-        //    student.FillBaseInfo(firstName, lastName, dateOfBirth);
-        //    student.IsOnVacation = isOnVacation;
-        //    student.OptionalClasses = optionalClasses;
-
-        //    return student;
-        //}
-
-        public void DropOut(University university)
-        {
-            university.RemoveStudent(this);
-        }
-        #endregion
-
         public Student() : this("", "", DateTime.MinValue, false, "") { }
 
         public Student(string firstName, string lastName, DateTime dateOfBirth, bool isOnVacation, string optionalClasses)
         {
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.dateOfBirth = dateOfBirth;
-            this.isOnVacation = isOnVacation;
-            this.optionalClasses = EducationalHelper.ToOptionalClasses(optionalClasses);
-            this.isFormalForm = true;
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.DateOfBirth = dateOfBirth;
+            this.IsOnVacation = isOnVacation;
+            this.OptionalClasses = EducationalHelper.ToOptionalClasses(optionalClasses);
+            this.IsFormalForm = true;
         }
 
         public Student(string firstName, string lastName, DateTime dateOfBirth, bool isOnVacation, ClassTypes optionalClasses)
         {
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.dateOfBirth = dateOfBirth;
-            this.isOnVacation = isOnVacation;
-            this.optionalClasses = optionalClasses;
-            this.isFormalForm = true;
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.DateOfBirth = dateOfBirth;
+            this.IsOnVacation = isOnVacation;
+            this.OptionalClasses = optionalClasses;
+            this.IsFormalForm = true;
         }
     }
 }

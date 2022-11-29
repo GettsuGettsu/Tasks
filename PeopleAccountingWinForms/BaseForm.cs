@@ -27,20 +27,19 @@ namespace PeopleAccountingWinForms
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            university.AddEmployee(new Employee("Andre", "Croldan", new DateTime(1991, 03, 14), false, 400));
-            university.AddEmployee(new Employee("Lena", "Hordan", new DateTime(1987, 11, 07), false, 450));
-            university.AddTeacher(new Teacher("Alexander", "Sirrius", new DateTime(1985, 05, 13), true, 657, EducationalHelper.ClassTypes.Math | EducationalHelper.ClassTypes.Physics));
+            university.AddEmployee(new Employee("Andre", "Croldan", new DateTime(1991, 03, 14), 400, false));
+            university.AddEmployee(new Employee("Lena", "Hordan", new DateTime(1987, 11, 07), 450, false));
+            university.AddTeacher(new Teacher("Alexander", "Sirrius", new DateTime(1985, 05, 13), 657, true, EducationalHelper.ClassTypes.Math | EducationalHelper.ClassTypes.Physics));
             university.AddStudent(new Student("Student1", "Student1", new DateTime(1999, 1, 1), false, EducationalHelper.ClassTypes.None));
         }
 
-        // TODO: buttons should call the same form with different logic (based on pressed button)
         private void StaffButton_Click(object sender, EventArgs e)
         {
             if (!isStaffOpened)
             {
                 isStaffOpened = true;
 
-                StaffTableForm staffForm = new StaffTableForm(university.Staff);
+                StaffTableForm staffForm = new StaffTableForm(false);
                 staffForm.Show(this);
 
                 staffForm.FormClosed += StaffForm_FormClosed;
@@ -58,7 +57,7 @@ namespace PeopleAccountingWinForms
             {
                 isStudentOpened = true;
 
-                StaffTableForm studentsForm = new StaffTableForm(university.Students);
+                StaffTableForm studentsForm = new StaffTableForm(true);
                 studentsForm.Show(this);
 
                 studentsForm.FormClosed += StudentsForm_FormClosed;
