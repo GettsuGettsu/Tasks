@@ -17,23 +17,31 @@ namespace PeopleAccountingWinForms
     public partial class StaffTableForm : Form
     {
         #region Fields
-        private DataTable staffTable = new DataTable();
+        private DataTable staffTable = new DataTable(); // temporary deprecated
         private bool isStudents = false;
+        private readonly string[] columnsOrder = new string[]
+            {
+                "Id", "FirstName", "LastName", "DateOfBirth",
+                "Salary", "IsOnVacation", "IsFormalForm", "IsTeacher",
+                "OptionalClasses"
+            };
         #endregion
 
         #region Constructors
         public StaffTableForm(bool isStudents)
         {
             InitializeComponent();
-
-            dataGridView1.RowHeadersWidth = dataGridView1.ColumnHeadersHeight;
-
             this.isStudents = isStudents;
-            CreateDataGridView();
         }
         #endregion
 
         #region Form events
+        private void StaffTableForm_Load(object sender, EventArgs e)
+        {
+            dataGridView1.RowHeadersWidth = dataGridView1.ColumnHeadersHeight;
+            CreateDataGridView();
+        }
+
         private void AddButton_Click(object sender, EventArgs e)
         {
             EditForm addForm = new EditForm(isStudents, false);
@@ -61,18 +69,18 @@ namespace PeopleAccountingWinForms
             var cells = selectedRow.Cells;
             if (isStudents)
             {
-                human = new Student((string)cells[1].Value, (string)cells[2].Value, (DateTime)cells[3].Value,
-                    (bool)cells[4].Value, (EducationalHelper.ClassTypes)cells[6].Value);
+                human = selectedRow.DataBoundItem as Student;// new Student((string)cells[1].Value, (string)cells[2].Value, (DateTime)cells[3].Value,
+                    // (bool)cells[4].Value, (EducationalHelper.ClassTypes)cells[6].Value);
             }
-            else if ((bool)cells["Is teacher"].Value)
+            else if ((bool)cells["IsTeacher"].Value)
             {
-                human = new Teacher((string)cells[1].Value, (string)cells[2].Value, (DateTime)cells[3].Value,
-                    (double)cells[4].Value, (bool)cells[5].Value, (EducationalHelper.ClassTypes)cells[8].Value);
+                human = selectedRow.DataBoundItem as Teacher;// new Teacher((string)cells[1].Value, (string)cells[2].Value, (DateTime)cells[3].Value,
+                    // (double)cells[4].Value, (bool)cells[5].Value, (EducationalHelper.ClassTypes)cells[8].Value);
             }
             else
             {
-                human = new Employee((string)cells[1].Value, (string)cells[2].Value, (DateTime)cells[3].Value,
-                    (double)cells[4].Value, (bool)cells[5].Value);
+                human = selectedRow.DataBoundItem as Employee; // new Employee((string)cells[1].Value, (string)cells[2].Value, (DateTime)cells[3].Value,
+                    //(double)cells[4].Value, (bool)cells[5].Value);
             }
 
             EditForm addForm = new EditForm(isStudents, true, human);
@@ -86,30 +94,60 @@ namespace PeopleAccountingWinForms
             {
                 if (isStudents)
                 {
-                    var student = BaseForm.university.Students.FirstOrDefault(member => (Guid)row.Cells[0].Value == member.Id);
+                    var student = row.DataBoundItem as Student;// BaseForm.university.Students.FirstOrDefault(member => (Guid)row.Cells[0].Value == member.Id);
                     BaseForm.university.Students.Remove(student);
                 }
                 else
                 {
-                    var staff = BaseForm.university.Staff.FirstOrDefault(member => (Guid)row.Cells[0].Value == member.Id);
+                    var staff = row.DataBoundItem as Employee;// BaseForm.university.Staff.FirstOrDefault(member => (Guid)row.Cells[0].Value == member.Id);
                     BaseForm.university.Staff.Remove(staff);
                 }
             }
-
-            CreateDataGridView();           
+            
+            CreateDataGridView();
         }
         #endregion
 
         #region Methods
         private void CreateDataGridView()
         {
-            staffTable.Clear();
-            CreateTable(staffTable);
+            dataGridView1.DataSource = null; // handling the "index N does not have a value" exception
 
-            dataGridView1.DataSource = staffTable;
+            //staffTable.Clear(); // temporary deprecated
+            //CreateTable(staffTable);
+
+            if (isStudents)
+                dataGridView1.DataSource = BaseForm.university.Students;
+            else
+                dataGridView1.DataSource = BaseForm.university.Staff; // staffTable;
+
+            SortDataGridView(dataGridView1);
             dataGridView1.Columns[0].Visible = false;
         }
 
+        private void SortDataGridView(DataGridView dataGridView1)
+        {
+            DataGridViewColumn column = new DataGridViewColumn();
+            int i = 0;
+            while (i < columnsOrder.Length)
+            {
+                try
+                {
+                    column = dataGridView1.Columns[columnsOrder[i]];
+                    dataGridView1.Columns.Remove(column);
+                    dataGridView1.Columns.Add(column);
+                    dataGridView1.Columns[columnsOrder[i]].DisplayIndex = i;
+                    i++;
+                }
+                catch
+                {
+                    i++;
+                    continue;
+                }
+            }
+        }
+
+        #region Temporary deprecated
         private void CreateTable(DataTable table)
         {
             AddColumns(table);
@@ -173,6 +211,8 @@ namespace PeopleAccountingWinForms
                 }
             }
         }
+        #endregion
+
         #endregion
     }
 }

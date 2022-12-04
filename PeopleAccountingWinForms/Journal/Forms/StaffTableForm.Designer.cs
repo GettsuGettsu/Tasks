@@ -125,6 +125,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "StaffTableForm";
             this.Text = "StudentsForm";
+            this.Load += new System.EventHandler(this.StaffTableForm_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
