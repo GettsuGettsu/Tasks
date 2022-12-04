@@ -55,35 +55,13 @@ namespace PeopleAccountingWinForms
 
         private void EditButton_Click(object sender, EventArgs e)
         {
-            object human;
-
-            DataGridViewRow selectedRow;
-            if (dataGridView1.SelectedRows.Count != 0)
-                selectedRow = dataGridView1.SelectedRows[0];
-            else
+            if (dataGridView1.SelectedRows.Count == 0)            
             {
                 FormsHelper.ShowError("No selected rows!");
                 return;
             }
 
-            var cells = selectedRow.Cells;
-            if (isStudents)
-            {
-                human = selectedRow.DataBoundItem as Student;// new Student((string)cells[1].Value, (string)cells[2].Value, (DateTime)cells[3].Value,
-                    // (bool)cells[4].Value, (EducationalHelper.ClassTypes)cells[6].Value);
-            }
-            else if ((bool)cells["IsTeacher"].Value)
-            {
-                human = selectedRow.DataBoundItem as Teacher;// new Teacher((string)cells[1].Value, (string)cells[2].Value, (DateTime)cells[3].Value,
-                    // (double)cells[4].Value, (bool)cells[5].Value, (EducationalHelper.ClassTypes)cells[8].Value);
-            }
-            else
-            {
-                human = selectedRow.DataBoundItem as Employee; // new Employee((string)cells[1].Value, (string)cells[2].Value, (DateTime)cells[3].Value,
-                    //(double)cells[4].Value, (bool)cells[5].Value);
-            }
-
-            EditForm addForm = new EditForm(isStudents, true, human);
+            EditForm addForm = new EditForm(isStudents, true, dataGridView1.SelectedRows[0]);
             addForm.ShowDialog(this);
         }
 
@@ -145,6 +123,31 @@ namespace PeopleAccountingWinForms
                     continue;
                 }
             }
+        }
+
+        private object GetSelectedObject()
+        {
+            object human;
+            DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+
+            var cells = selectedRow.Cells;
+            if (isStudents)
+            {
+                human = selectedRow.DataBoundItem as Student;// new Student((string)cells[1].Value, (string)cells[2].Value, (DateTime)cells[3].Value,
+                                                             // (bool)cells[4].Value, (EducationalHelper.ClassTypes)cells[6].Value);
+            }
+            else if ((bool)cells["IsTeacher"].Value)
+            {
+                human = selectedRow.DataBoundItem as Teacher;// new Teacher((string)cells[1].Value, (string)cells[2].Value, (DateTime)cells[3].Value,
+                                                             // (double)cells[4].Value, (bool)cells[5].Value, (EducationalHelper.ClassTypes)cells[8].Value);
+            }
+            else
+            {
+                human = selectedRow.DataBoundItem as Employee; // new Employee((string)cells[1].Value, (string)cells[2].Value, (DateTime)cells[3].Value,
+                                                               //(double)cells[4].Value, (bool)cells[5].Value);
+            }
+
+            return human;
         }
 
         #region Temporary deprecated

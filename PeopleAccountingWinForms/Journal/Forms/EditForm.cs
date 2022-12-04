@@ -16,13 +16,15 @@ namespace PeopleAccountingWinForms.Journal.StudentsButtonForms
     {
         private bool isStudents = false;
         private bool isEdit = false;
+        private DataGridViewRow selectedRow = null;
 
-        internal EditForm(bool isStudents, bool isEdit, object human = null)
+        internal EditForm(bool isStudents, bool isEdit, DataGridViewRow selectedRow = null)
         {
             InitializeComponent();
 
             this.isStudents = isStudents;
             this.isEdit = isEdit;
+            this.selectedRow = selectedRow;
         }
 
         private void EditForm_Load(object sender, EventArgs e)
@@ -34,21 +36,29 @@ namespace PeopleAccountingWinForms.Journal.StudentsButtonForms
                 optionalClasses_panel.Visible = true;
             }
             if (isEdit)
-                DoEditPrepare();
+                DoEditPrepare(selectedRow);
         }
 
-        private void DoEditPrepare()
+        private void DoEditPrepare(DataGridViewRow selectedRow)
         {
-            var owner = this.Owner as StaffTableForm;
-            DataGridView dataGridView = GetDataGrid(owner);
+            object human;
 
-            if (dataGridView == null)
+            var cells = selectedRow.Cells;
+            if (isStudents)
             {
-                MessageBox.Show("Error!");
-                Close();
+                human = selectedRow.DataBoundItem as Student;// new Student((string)cells[1].Value, (string)cells[2].Value, (DateTime)cells[3].Value,
+                                                             // (bool)cells[4].Value, (EducationalHelper.ClassTypes)cells[6].Value);
             }
-
-            GetSelectedRows(dataGridView);
+            else if ((bool)cells["IsTeacher"].Value)
+            {
+                human = selectedRow.DataBoundItem as Teacher;// new Teacher((string)cells[1].Value, (string)cells[2].Value, (DateTime)cells[3].Value,
+                                                             // (double)cells[4].Value, (bool)cells[5].Value, (EducationalHelper.ClassTypes)cells[8].Value);
+            }
+            else
+            {
+                human = selectedRow.DataBoundItem as Employee; // new Employee((string)cells[1].Value, (string)cells[2].Value, (DateTime)cells[3].Value,
+                                                               //(double)cells[4].Value, (bool)cells[5].Value);
+            }
 
             //dataGridView.SelectedRows[0].Cells[0]. DataSource = dataGridView.Rows;
         }
@@ -65,22 +75,6 @@ namespace PeopleAccountingWinForms.Journal.StudentsButtonForms
             }
 
             return dataGridView;
-        }
-
-        private void GetSelectedRows(DataGridView dataGridView)
-        {
-            var selectedRows = dataGridView.SelectedRows;
-
-            foreach (DataGridViewRow row in selectedRows)
-            {
-                //row
-            }
-            //selectedRows[0].Cells
-            /*var selectedCells = dataGridView.SelectedCells;
-            //var dataTable = this.Controls["data_TableLayoutPanel"] as TableLayoutPanel;
-            firstName_textBox.Text = (string)selectedCells[0].Value;
-            lastName_textBox.Text = (string)selectedCells[1].Value;
-            dateOfBirth_dateTimePicker.Value = (DateTime)selectedCells[2].Value;*/
         }
 
         private void ok_button_Click(object sender, EventArgs e)
