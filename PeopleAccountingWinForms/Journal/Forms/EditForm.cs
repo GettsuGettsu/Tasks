@@ -99,11 +99,6 @@ namespace PeopleAccountingWinForms.Journal.StudentsButtonForms
 
                 foreach (Control control in panel.Controls)
                 {
-                    if (!control.Visible)
-                    {
-                        continue;
-                    }
-
                     object cntrl = control as TextBox;
                     if (cntrl != null)
                     {
@@ -186,7 +181,7 @@ namespace PeopleAccountingWinForms.Journal.StudentsButtonForms
         {
             foreach (var prop in human.GetType().GetProperties())
             {
-                if (prop.Name == "Id")
+                if (prop.Name == "Id" || prop.Name == "IsFormalForm")
                 {
                     continue;
                 }
@@ -225,6 +220,11 @@ namespace PeopleAccountingWinForms.Journal.StudentsButtonForms
         {
             foreach (Panel panel in this.Controls)
             {
+                if (!panel.Visible)
+                {
+                    continue;
+                }
+
                 foreach (Control control in panel.Controls)
                 {
                     if (!control.Name.Contains("label") && control.Name.ToLower().Contains(propName.ToLower()))
