@@ -35,7 +35,7 @@ namespace PeopleAccountingWinForms
         }
         #endregion
 
-        #region Form events
+        #region Events
         private void StaffTableForm_Load(object sender, EventArgs e)
         {
             dataGridView1.RowHeadersWidth = dataGridView1.ColumnHeadersHeight;
@@ -63,6 +63,8 @@ namespace PeopleAccountingWinForms
 
             EditForm addForm = new EditForm(isStudents, true, dataGridView1.SelectedRows[0]);
             addForm.ShowDialog(this);
+            
+            CreateDataGridView();
         }
 
         private void RemoveButton_Click(object sender, EventArgs e)
@@ -123,13 +125,6 @@ namespace PeopleAccountingWinForms
                     continue;
                 }
             }
-        }
-
-        private object GetSelectedObject()
-        {
-            
-
-            return human;
         }
 
         #region Temporary deprecated

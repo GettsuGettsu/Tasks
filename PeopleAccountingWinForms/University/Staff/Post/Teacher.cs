@@ -18,9 +18,9 @@ namespace PeopleAccounting.Staff.Post
         }
         #endregion
 
-        public Teacher() : this("", "", DateTime.MinValue, 0.0, false, "") { }
+        public Teacher() : this("", "", DateTime.MinValue, 0, false, "") { }
 
-        public Teacher(string firstName, string lastName, DateTime dateOfBirth, double salary, bool isOnVacation, string optionalClasses)
+        public Teacher(string firstName, string lastName, DateTime dateOfBirth, decimal salary, bool isOnVacation, string optionalClasses)
         {
             this.FirstName = firstName;
             this.LastName = lastName;
@@ -32,7 +32,7 @@ namespace PeopleAccounting.Staff.Post
             this.IsTeacher = true;
         }
 
-        public Teacher(string firstName, string lastName, DateTime dateOfBirth, double salary, bool isOnVacation, ClassTypes optionalClasses)
+        public Teacher(string firstName, string lastName, DateTime dateOfBirth, decimal salary, bool isOnVacation, ClassTypes optionalClasses)
         {
             this.FirstName = firstName;
             this.LastName = lastName;

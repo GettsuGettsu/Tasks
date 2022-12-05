@@ -10,8 +10,8 @@ namespace PeopleAccounting.Staff.Post
     public class Employee : Human
     {
         #region Properties
-        private double salary = 0.0;
-        public double Salary
+        private decimal salary = 0;
+        public decimal Salary
         {
             get { return salary; }
             set { salary = value; }
@@ -25,9 +25,9 @@ namespace PeopleAccounting.Staff.Post
         }
         #endregion       
 
-        public Employee() : this("", "", DateTime.MinValue, 0.0, false) { }
+        public Employee() : this("", "", DateTime.MinValue, 0, false) { }
 
-        public Employee(string firstName, string lastName, DateTime dateOfBirth, double salary, bool isOnVacation)
+        public Employee(string firstName, string lastName, DateTime dateOfBirth, decimal salary, bool isOnVacation)
         {
             this.FirstName = firstName;
             this.LastName = lastName;
