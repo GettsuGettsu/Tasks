@@ -62,9 +62,12 @@ namespace PeopleAccountingWinForms
             }
 
             EditForm addForm = new EditForm(isStudents, true, dataGridView1.SelectedRows[0]);
-            addForm.ShowDialog(this);
-            
-            CreateDataGridView();
+            var result = addForm.ShowDialog(this);
+
+            if (result == DialogResult.OK)
+            {
+                CreateDataGridView();
+            }
         }
 
         private void RemoveButton_Click(object sender, EventArgs e)
@@ -91,38 +94,53 @@ namespace PeopleAccountingWinForms
         #region Methods
         private void CreateDataGridView()
         {
-            dataGridView1.DataSource = null; // handling the "index N does not have a value" exception
+            ResetDataGridView(dataGridView1);            
 
             //staffTable.Clear(); // temporary deprecated
             //CreateTable(staffTable);
 
             if (isStudents)
+            {
                 dataGridView1.DataSource = BaseForm.university.Students;
+            }
             else
+            {                
                 dataGridView1.DataSource = BaseForm.university.Staff; // staffTable;
+                //DataGridViewColumn optionalClassesColumn = new DataGridViewTextBoxColumn();
+                //optionalClassesColumn.DataPropertyName = "OptionalClasses";
+                //optionalClassesColumn.Name = "OptionalClasses";
+
+                var col = dataGridView1.Columns["OptionalClasses"];
+                if (col == null)
+                {
+                    col = new DataGridViewTextBoxColumn();
+                    col.Name = "OptionalClasses";
+                    col.DataPropertyName = col.Name;                    
+                    dataGridView1.Columns.Add(col);
+                }
+            }
 
             SortDataGridView(dataGridView1);
-            dataGridView1.Columns[0].Visible = false;
+            dataGridView1.Columns["Id"].Visible = false;            
+        }
+
+        private void ResetDataGridView(DataGridView dataGridView1)
+        {
+            dataGridView1.DataSource = null; // handling the "index N does not have a value" exception
+            //dataGridView1.Columns.Clear();
         }
 
         private void SortDataGridView(DataGridView dataGridView1)
         {
-            DataGridViewColumn column = new DataGridViewColumn();
-            int i = 0;
-            while (i < columnsOrder.Length)
+            for (int i = 0; i < columnsOrder.Length; i++)
             {
                 try
                 {
-                    column = dataGridView1.Columns[columnsOrder[i]];
-                    dataGridView1.Columns.Remove(column);
-                    dataGridView1.Columns.Add(column);
                     dataGridView1.Columns[columnsOrder[i]].DisplayIndex = i;
-                    i++;
                 }
                 catch
                 {
-                    i++;
-                    continue;
+                    // ingnore if Columns[columnsOrder[i]] is null
                 }
             }
         }
