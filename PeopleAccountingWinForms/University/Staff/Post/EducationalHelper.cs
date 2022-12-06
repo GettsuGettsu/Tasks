@@ -31,10 +31,11 @@ namespace PeopleAccounting.Staff.Post
         internal static ClassTypes ToOptionalClasses(string optionalClasses)
         {
             ClassTypes types = ClassTypes.None;
-            optionalClasses = optionalClasses.ToLower(); //.Trim(chars);
-
+            
             if (String.IsNullOrEmpty(optionalClasses))
                 return types;
+
+            optionalClasses = optionalClasses.ToLower(); //.Trim(chars);
 
             if (optionalClasses.Contains("math"))
                 types |= ClassTypes.Math;
