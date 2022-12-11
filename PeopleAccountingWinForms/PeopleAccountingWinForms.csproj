@@ -52,6 +52,12 @@
     <Compile Include="BaseForm.Designer.cs">
       <DependentUpon>BaseForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Journal\Forms\EditFormDinamyc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Journal\Forms\EditFormDinamyc.Designer.cs">
+      <DependentUpon>EditFormDinamyc.cs</DependentUpon>
+    </Compile>
     <Compile Include="Journal\Forms\EditForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,6 +82,9 @@
     <Compile Include="University\UniversityHelper.cs" />
     <EmbeddedResource Include="BaseForm.resx">
       <DependentUpon>BaseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Journal\Forms\EditFormDinamyc.resx">
+      <DependentUpon>EditFormDinamyc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Journal\Forms\EditForm.resx">
       <DependentUpon>EditForm.cs</DependentUpon>

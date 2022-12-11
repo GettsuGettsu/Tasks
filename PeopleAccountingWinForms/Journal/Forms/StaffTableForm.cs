@@ -1,7 +1,7 @@
 ﻿using PeopleAccounting.Staff;
 using PeopleAccounting.Staff.Post;
 using PeopleAccountingWinForms.Journal.Helpers;
-using PeopleAccountingWinForms.Journal.StudentsButtonForms;
+using PeopleAccountingWinForms.Journal.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,11 +20,11 @@ namespace PeopleAccountingWinForms
         private DataTable staffTable = new DataTable(); // temporary deprecated
         private bool isStudents = false;
         private readonly string[] columnsOrder = new string[]
-            {
-                "Id", "FirstName", "LastName", "DateOfBirth",
-                "Salary", "IsOnVacation", "IsFormalForm", "IsTeacher",
-                "OptionalClasses"
-            };
+        {
+            "Id", "FirstName", "LastName", "DateOfBirth",
+            "Salary", "IsOnVacation", "IsFormalForm", "IsTeacher",
+            "OptionalClasses"
+        };
         #endregion
 
         #region Constructors
@@ -44,7 +44,8 @@ namespace PeopleAccountingWinForms
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            EditForm addForm = new EditForm(isStudents, false);
+            //EditForm addForm = new EditForm(isStudents, false);
+            EditFormDynamic addForm = new EditFormDynamic(dataGridView1.SelectedRows[0].DataBoundItem);
             var result = addForm.ShowDialog(this);
 
             if (result == DialogResult.OK)
@@ -61,7 +62,8 @@ namespace PeopleAccountingWinForms
                 return;
             }
 
-            EditForm addForm = new EditForm(isStudents, true, dataGridView1.SelectedRows[0]);
+            //EditForm addForm = new EditForm(isStudents, true, dataGridView1.SelectedRows[0]);
+            EditFormDynamic addForm = new EditFormDynamic(dataGridView1.SelectedRows[0].DataBoundItem, true);
             var result = addForm.ShowDialog(this);
 
             if (result == DialogResult.OK)
@@ -132,16 +134,12 @@ namespace PeopleAccountingWinForms
 
         private void SortDataGridView(DataGridView dataGridView1)
         {
+            int indexDifference = 0;
             for (int i = 0; i < columnsOrder.Length; i++)
             {
-                try
-                {
-                    dataGridView1.Columns[columnsOrder[i]].DisplayIndex = i;
-                }
-                catch
-                {
-                    // ingnore if Columns[columnsOrder[i]] is null
-                }
+                if (dataGridView1.Columns[columnsOrder[i]] != null)
+                    dataGridView1.Columns[columnsOrder[i]].DisplayIndex = i - indexDifference;
+                else indexDifference++;
             }
         }
 

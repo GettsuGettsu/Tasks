@@ -1,4 +1,4 @@
-﻿namespace PeopleAccountingWinForms.Journal.StudentsButtonForms
+﻿namespace PeopleAccountingWinForms.Journal.Forms
 {
     partial class EditForm
     {
@@ -30,8 +30,9 @@
         {
             this.buttons_panel = new System.Windows.Forms.Panel();
             this.cancel_button = new System.Windows.Forms.Button();
-            this.ok_button = new System.Windows.Forms.Button();
             this.isFormalForm_checkBox = new System.Windows.Forms.CheckBox();
+            this.ok_button = new System.Windows.Forms.Button();
+            this.isFormalForm_label = new System.Windows.Forms.Label();
             this.isTeacher_checkBox = new System.Windows.Forms.CheckBox();
             this.optionalClasses_textBox = new System.Windows.Forms.TextBox();
             this.salary_numericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -40,7 +41,6 @@
             this.isTeacher_label = new System.Windows.Forms.Label();
             this.salary_label = new System.Windows.Forms.Label();
             this.isOnVacation_label = new System.Windows.Forms.Label();
-            this.isFormalForm_label = new System.Windows.Forms.Label();
             this.dateOfBirth_label = new System.Windows.Forms.Label();
             this.lastName_textBox = new System.Windows.Forms.TextBox();
             this.lastName_label = new System.Windows.Forms.Label();
@@ -91,6 +91,20 @@
             this.cancel_button.Text = "Cancel";
             this.cancel_button.UseVisualStyleBackColor = false;
             // 
+            // isFormalForm_checkBox
+            // 
+            this.isFormalForm_checkBox.AutoSize = true;
+            this.isFormalForm_checkBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.isFormalForm_checkBox.ForeColor = System.Drawing.Color.White;
+            this.isFormalForm_checkBox.Location = new System.Drawing.Point(259, 3);
+            this.isFormalForm_checkBox.Name = "isFormalForm_checkBox";
+            this.isFormalForm_checkBox.Size = new System.Drawing.Size(43, 29);
+            this.isFormalForm_checkBox.TabIndex = 11;
+            this.isFormalForm_checkBox.Text = " ";
+            this.isFormalForm_checkBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.isFormalForm_checkBox.UseVisualStyleBackColor = true;
+            this.isFormalForm_checkBox.Visible = false;
+            // 
             // ok_button
             // 
             this.ok_button.BackColor = System.Drawing.SystemColors.Highlight;
@@ -109,19 +123,17 @@
             this.ok_button.UseVisualStyleBackColor = false;
             this.ok_button.Click += new System.EventHandler(this.ok_button_Click);
             // 
-            // isFormalForm_checkBox
+            // isFormalForm_label
             // 
-            this.isFormalForm_checkBox.AutoSize = true;
-            this.isFormalForm_checkBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.isFormalForm_checkBox.ForeColor = System.Drawing.Color.White;
-            this.isFormalForm_checkBox.Location = new System.Drawing.Point(259, 3);
-            this.isFormalForm_checkBox.Name = "isFormalForm_checkBox";
-            this.isFormalForm_checkBox.Size = new System.Drawing.Size(43, 29);
-            this.isFormalForm_checkBox.TabIndex = 11;
-            this.isFormalForm_checkBox.Text = " ";
-            this.isFormalForm_checkBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.isFormalForm_checkBox.UseVisualStyleBackColor = true;
-            this.isFormalForm_checkBox.Visible = false;
+            this.isFormalForm_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.isFormalForm_label.ForeColor = System.Drawing.Color.White;
+            this.isFormalForm_label.Location = new System.Drawing.Point(11, -1);
+            this.isFormalForm_label.Name = "isFormalForm_label";
+            this.isFormalForm_label.Size = new System.Drawing.Size(244, 33);
+            this.isFormalForm_label.TabIndex = 10;
+            this.isFormalForm_label.Text = "Formal form";
+            this.isFormalForm_label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.isFormalForm_label.Visible = false;
             // 
             // isTeacher_checkBox
             // 
@@ -218,18 +230,6 @@
             this.isOnVacation_label.TabIndex = 8;
             this.isOnVacation_label.Text = "On vacation";
             this.isOnVacation_label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // isFormalForm_label
-            // 
-            this.isFormalForm_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.isFormalForm_label.ForeColor = System.Drawing.Color.White;
-            this.isFormalForm_label.Location = new System.Drawing.Point(11, -1);
-            this.isFormalForm_label.Name = "isFormalForm_label";
-            this.isFormalForm_label.Size = new System.Drawing.Size(244, 33);
-            this.isFormalForm_label.TabIndex = 10;
-            this.isFormalForm_label.Text = "Formal form";
-            this.isFormalForm_label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.isFormalForm_label.Visible = false;
             // 
             // dateOfBirth_label
             // 

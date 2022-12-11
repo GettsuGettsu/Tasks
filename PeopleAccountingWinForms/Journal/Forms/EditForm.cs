@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PeopleAccountingWinForms.Journal.StudentsButtonForms
+namespace PeopleAccountingWinForms.Journal.Forms
 {
     public partial class EditForm : Form
     {

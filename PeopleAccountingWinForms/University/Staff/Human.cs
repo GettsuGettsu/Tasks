@@ -22,7 +22,6 @@ namespace PeopleAccounting.Staff
             get { return lastName; }
             set { lastName = value; }
         }
-
         
         private DateTime dateOfBirth;
         public DateTime DateOfBirth
