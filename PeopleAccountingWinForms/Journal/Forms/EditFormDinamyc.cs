@@ -27,27 +27,33 @@ namespace PeopleAccountingWinForms.Journal.Forms
         {
             this.isEdit = isEdit;
             this.selectedObject = selectedObject;
-
-            InitializeComponent();
             
             CheckObjectType(selectedObject);
             InitializeForm();
+
+            InitializeComponent();
+
+            this.Width = this.Controls[0].Left * 4 + this.Controls[0].Width * 2;
         }
 
         private void InitializeForm()
         {
             Font font = new Font("Microsoft Sans Serif", 10f);
             PropertyInfo[] objectProperties = objectType.GetProperties();
-            
+
             for (int i = 0; i < objectProperties.Length; i++)
             {
                 PropertyInfo prop = objectProperties[i];
+                if (prop.Name == "Id")
+                {
+                    continue;
+                }
 
                 Label label = new Label();
                 label.Left = 12;
                 label.Height = 33;
                 label.Width = 244;
-                label.Name = prop.Name + "_label" + i;
+                label.Name = prop.Name + "_Label" + (i + 1);
                 label.Text = prop.Name;
                 label.Font = font;
                 label.ForeColor = Color.White;
@@ -59,7 +65,12 @@ namespace PeopleAccountingWinForms.Journal.Forms
                 }
                 else
                 {
-                    Control prevLabel = this.Controls[i - 1];
+                    Control prevLabel = this.Controls[this.Controls.Count - 1];
+                    if (prevLabel.GetType() != typeof(Label))
+                    {
+                        prevLabel = this.Controls[this.Controls.Count - 2];
+                    }                    
+
                     label.Top = prevLabel.Bottom + 7;
                 }
 
@@ -76,15 +87,16 @@ namespace PeopleAccountingWinForms.Journal.Forms
                 }
                 if (prop.PropertyType == typeof(DateTime))
                 {
-                    valueControl = new DateTimePicker();
+                    valueControl = new DateTimePicker();                    
+                    (valueControl as DateTimePicker).Format = DateTimePickerFormat.Short;
                 }
                 if (valueControl == null)
                 {
                     valueControl = new TextBox();
-                    valueControl.Name = prop.Name + "_textBox" + i;
                     (valueControl as TextBox).TextAlign = HorizontalAlignment.Left;
                 }
 
+                valueControl.Name = prop.Name + $"_{valueControl.GetType().Name}" + (i + 1);
                 valueControl.Height = 30;
                 valueControl.Width = 244;
                 valueControl.Font = font;
