@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 namespace PeopleAccounting.Staff
 {
     public class Human
-    {        
+    {
         #region Properties
+        public Dictionary<int, string> properties = new Dictionary<int, string>();
+
         private string firstName;
         public string FirstName 
         { 

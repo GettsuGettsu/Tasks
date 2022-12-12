@@ -20,6 +20,8 @@ namespace PeopleAccountingWinForms.Journal.Forms
         private bool isEdit;
         private object selectedObject = null;
         private Type objectType = null;
+        private readonly int controlHeight = 30;
+        private readonly int controlWidth = 244;
         #endregion
 
         #region Constructor
@@ -33,7 +35,7 @@ namespace PeopleAccountingWinForms.Journal.Forms
 
             InitializeComponent();
 
-            this.Width = this.Controls[0].Left * 4 + this.Controls[0].Width * 2;
+            this.Width += this.Controls[0].Left;
         }
 
         private void InitializeForm()
@@ -51,8 +53,8 @@ namespace PeopleAccountingWinForms.Journal.Forms
 
                 Label label = new Label();
                 label.Left = 12;
-                label.Height = 33;
-                label.Width = 244;
+                label.Height = this.controlHeight;
+                label.Width = this.controlWidth;
                 label.Name = prop.Name + "_Label" + (i + 1);
                 label.Text = prop.Name;
                 label.Font = font;
@@ -97,8 +99,8 @@ namespace PeopleAccountingWinForms.Journal.Forms
                 }
 
                 valueControl.Name = prop.Name + $"_{valueControl.GetType().Name}" + (i + 1);
-                valueControl.Height = 30;
-                valueControl.Width = 244;
+                valueControl.Height = this.controlHeight;
+                valueControl.Width = this.controlWidth;
                 valueControl.Font = font;
                 valueControl.Left = label.Width + label.Left * 2;
                 valueControl.Top = label.Top;
