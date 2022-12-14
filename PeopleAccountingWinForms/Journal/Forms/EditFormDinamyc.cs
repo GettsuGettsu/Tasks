@@ -24,13 +24,13 @@ namespace PeopleAccountingWinForms.Journal.Forms
         #endregion
 
         #region Constructor
-        internal EditFormDynamic(object selectedObject, bool isEdit = false)
+        internal EditFormDynamic(object selectedObject, bool isStudent = false)
         {
-            this.isEdit = isEdit;
+            this.isEdit = !(selectedObject == null);
             this.selectedObject = selectedObject;
-
-            CheckObjectType(selectedObject);
-            InitializeForm();
+            
+            CheckObjectType(selectedObject, isStudent);
+            InitializeForm(this.objectType);
 
             InitializeComponent();
 
@@ -47,7 +47,7 @@ namespace PeopleAccountingWinForms.Journal.Forms
             this.Size = new Size(calcWidth, calcHeight);
         }
 
-        private void InitializeForm()
+        private void InitializeForm(Type objectType)
         {
             Font font = new Font("Microsoft Sans Serif", 10f);
             PropertyInfo[] objectProperties = objectType.GetProperties();
@@ -93,8 +93,8 @@ namespace PeopleAccountingWinForms.Journal.Forms
             }            
 
             // refactor button position
-            Button okButton = CreateButton("OK", lastPos.X, lastPos.Y + size.Height + 25, size.Width / 2 - 14, 40, true, false); 
-            Button cancelButton = CreateButton("Cancel", okButton.Left + okButton.Width, okButton.Top, okButton.Width, okButton.Height, false, true);
+            Button okButton = CreateButton("OK", lastPos.X, lastPos.Y + size.Height + 25, size.Width / 2 - pos.X / 2, 40, true, false); 
+            Button cancelButton = CreateButton("Cancel", okButton.Right + pos.X, okButton.Top, okButton.Width, okButton.Height, false, true);
 
             this.Controls.Add(okButton);
             this.Controls.Add(cancelButton);
@@ -141,7 +141,9 @@ namespace PeopleAccountingWinForms.Journal.Forms
 
             if (propertyType == typeof(bool))
             {
-                return new CheckBox();
+                control = new CheckBox();
+                (control as CheckBox).CheckedChanged += EditFormDynamic_CheckedChanged;
+                return control;
             }
 
             if (propertyType == typeof(DateTime))
@@ -156,8 +158,25 @@ namespace PeopleAccountingWinForms.Journal.Forms
             return control;
         }
 
-        private void CheckObjectType(object selectedObject)
+        private void EditFormDynamic_CheckedChanged(object sender, EventArgs e)
         {
+            if ((sender as CheckBox).Checked)
+            {
+                this.Controls.Clear();
+                InitializeForm(typeof(Teacher));
+                CalculateFormSize();
+            }
+            this.Refresh();
+        }
+
+        private void CheckObjectType(object selectedObject, bool isStudent)
+        {
+            if (selectedObject == null)
+            {
+                objectType = isStudent ? typeof(Student) : typeof(Employee);
+                return;
+            }
+
             if (selectedObject.GetType() == typeof(Student))
             {
                 objectType = typeof(Student);

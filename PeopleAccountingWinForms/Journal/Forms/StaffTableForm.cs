@@ -45,7 +45,7 @@ namespace PeopleAccountingWinForms
         private void AddButton_Click(object sender, EventArgs e)
         {
             //EditForm addForm = new EditForm(isStudents, false);
-            EditFormDynamic addForm = new EditFormDynamic(dataGridView1.SelectedRows[0].DataBoundItem);
+            EditFormDynamic addForm = new EditFormDynamic(null, isStudents);
             var result = addForm.ShowDialog(this);
 
             if (result == DialogResult.OK)
@@ -62,8 +62,8 @@ namespace PeopleAccountingWinForms
                 return;
             }
 
-            //EditForm addForm = new EditForm(isStudents, true, dataGridView1.SelectedRows[0]);
-            EditFormDynamic addForm = new EditFormDynamic(dataGridView1.SelectedRows[0].DataBoundItem, true);
+            //EditForm addForm = new EditForm(isStudents, true, dataGridView1.SelectedRows[0]);            
+            EditFormDynamic addForm = new EditFormDynamic(dataGridView1.SelectedRows[0].DataBoundItem);
             var result = addForm.ShowDialog(this);
 
             if (result == DialogResult.OK)
