@@ -22,6 +22,7 @@ namespace PeopleAccountingWinForms.Journal.Forms
         private object selectedObject = null;
         private Type objectType = null;
         private Font font = new Font("Microsoft Sans Serif", 10f);
+        private readonly int controlsMargin = 14;
         private Point pos = new Point(12, 14);
         private Size size = new Size(244, 30);
         private Point lastPos = new Point();
@@ -32,7 +33,7 @@ namespace PeopleAccountingWinForms.Journal.Forms
         {
             this.isEdit = !(selectedObject == null);
             this.selectedObject = selectedObject;
-            
+
             CheckObjectType(selectedObject, isStudent);
             InitializeForm(this.objectType);
 
@@ -75,14 +76,14 @@ namespace PeopleAccountingWinForms.Journal.Forms
             var controls = this.Controls;
 
             int calcWidth = controls[0].Width * 2 + 12 * 4; // that's magic for me
-            int calcHeight = controls[controls.Count - 2].Top + controls[controls.Count - 1].Height + 14 * (controls.Count / 2 - 2);
-            
+            int calcHeight = controls[controls.Count - 2].Bottom + controls[controls.Count - 1].Height + controlsMargin * (controls.Count / 2 - 2);
+
             this.Size = new Size(calcWidth, calcHeight);
         }
 
         private void InitializeForm(Type objectType)
         {
-            PropertyInfo[] objectProperties = objectType.GetProperties();            
+            PropertyInfo[] objectProperties = objectType.GetProperties();
 
             for (int i = 0; i < objectProperties.Length; i++)
             {
@@ -97,10 +98,10 @@ namespace PeopleAccountingWinForms.Journal.Forms
 
             Panel buttonsPanel = new Panel();
             buttonsPanel.Dock = DockStyle.Bottom;
-            buttonsPanel.Height = 40 + 14;
+            buttonsPanel.Height = 40 + controlsMargin;
 
             // refactor button position
-            Button okButton = CreateButton("OK", lastPos.X, 7, size.Width / 2 - pos.X / 2, 40, true, false); 
+            Button okButton = CreateButton("OK", lastPos.X, 7, size.Width / 2 - pos.X / 2, 40, true, false);
             Button cancelButton = CreateButton("Cancel", okButton.Right + pos.X, okButton.Top, okButton.Width, okButton.Height, false, true);
 
             buttonsPanel.Controls.Add(okButton);
@@ -119,7 +120,20 @@ namespace PeopleAccountingWinForms.Journal.Forms
             Control valueControl = CreateControlByPropertyInfo(font, size, prop, label);
             this.Controls.Add(valueControl);
 
-            pos.Y = label.Top + label.Height + 14;
+            pos.Y = label.Top + label.Height + controlsMargin;
+            lastPos.X = valueControl.Left;
+            lastPos.Y = valueControl.Top;
+        }
+
+        private void CreateControlWithLabelByPropInfo(Font font, Point pos, Size size, PropertyInfo prop, Point lastPos)
+        {
+            Label label = CreateLabel(font, pos, size, prop);
+            this.Controls.Add(label);
+
+            Control valueControl = CreateControlByPropertyInfo(font, size, prop, label);
+            this.Controls.Add(valueControl);
+
+            pos.Y = label.Top + label.Height + controlsMargin;
             lastPos.X = valueControl.Left;
             lastPos.Y = valueControl.Top;
         }
@@ -198,7 +212,7 @@ namespace PeopleAccountingWinForms.Journal.Forms
             button.Height = height;
             button.FlatStyle = FlatStyle.Flat;
             button.ForeColor = SystemColors.ButtonFace;
-            
+
             if (isOkButton)
             {
                 button.BackColor = SystemColors.Highlight;
@@ -221,10 +235,35 @@ namespace PeopleAccountingWinForms.Journal.Forms
                 //InitializeForm(typeof(Teacher));
                 //CalculateFormSize();
                 objectType = typeof(Teacher);
-                CreateControlWithLabelByPropInfo(font, ref pos, size, objectType.GetProperty("OptionalClasses"), ref lastPos);
-                CalculateFormSize();
+                AddOptionalClassesControls();
+                //CreateControlWithLabelByPropInfo(font, pos, size, objectType.GetProperty("OptionalClasses"), lastPos);
             }
-            this.Refresh();
+            else
+            {
+                objectType = typeof(Employee);
+                RemoveOptionalClassesControls();
+            }
+            CalculateFormSize();
+        }
+
+        private void AddOptionalClassesControls()
+        {
+            PropertyInfo prop = objectType.GetProperty("OptionalClasses");
+            CreateControlWithLabelByPropInfo(font, pos, size, prop, lastPos);
+        }
+
+        private void RemoveOptionalClassesControls()
+        {
+            string name = "OptionalClasses";
+            foreach (Control control in this.Controls)
+            {
+                if (control.Name.Contains(name))
+                {
+                    this.Controls.Remove(control);
+                    RemoveOptionalClassesControls();
+                    break;
+                }
+            }
         }
         #endregion
 
