@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RotatingQuadrilateral", "Ro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleAccountingWinForms", "PeopleAccountingWinForms\PeopleAccountingWinForms.csproj", "{22D62C56-221E-49F5-94A2-A2E0E3CB59B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nutcracker", "TheNutcracker\Nutcracker.csproj", "{31F76360-B69C-4CC3-B93C-66A229E4B98C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{22D62C56-221E-49F5-94A2-A2E0E3CB59B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22D62C56-221E-49F5-94A2-A2E0E3CB59B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22D62C56-221E-49F5-94A2-A2E0E3CB59B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31F76360-B69C-4CC3-B93C-66A229E4B98C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31F76360-B69C-4CC3-B93C-66A229E4B98C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31F76360-B69C-4CC3-B93C-66A229E4B98C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31F76360-B69C-4CC3-B93C-66A229E4B98C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
