@@ -15,7 +15,23 @@
 
     public class Dophin
     {
-        private readonly string skin = "Golden";
+        private string skin;
+        public string Skin 
+        { 
+            get 
+            { 
+                return skin; 
+            } 
+            set 
+            { 
+                skin = value; 
+            } 
+        }
+
+        public void MakeFontain()
+        {
+
+        }
     }
 
     public class Sea : Water
