@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace Nutcracker
+﻿namespace Nutcracker
 {
     internal class Program
     {
