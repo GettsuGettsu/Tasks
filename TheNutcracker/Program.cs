@@ -1,4 +1,6 @@
-﻿namespace Nutcracker
+﻿using System.Runtime.CompilerServices;
+
+namespace NutcrackerStory
 {
     internal class Program
     {
@@ -26,21 +28,27 @@
     {
         public static void Run()
         {
-            Sea.AddDophins(2, "Golden-scale");
+            int dolphinsCount = 2;
+            string dolphinScale = "Golden-scale";
+            int moorsCount = 12;
+
+            for (int i = 0; i < dolphinsCount; i++)
+            {
+                Sea.AddDophin(dolphinScale);
+            }
 
             foreach (Dophin dophin in Sea.Dophins)
             {
+                dophin.RaiseHead();
                 dophin.MakeFontain();
             }
 
-            Splashes.IsCreated = true;
-            Splashes.IsCrystal = true;
+            Splashes.Create();
             Splashes.IsFlashing = true;
-            Splashes.Sing();
-            Splashes.Destroy();
+            Splashes.Sing();            
 
             List<Moor> moors = new();
-            for (int i = 0; i < 12; i++)
+            for (int i = 0; i < moorsCount; i++)
             {
                 Moor moor = new();
                 moor.Parasol = new Parasol
@@ -51,6 +59,20 @@
             }
 
             Maria.Escort = moors;
+
+            foreach (Moor moor in Maria.Escort)
+            {
+                moor.IsPleased = false;
+                moor.ShakeParasol();
+                moor.Stomp();
+                moor.Sing();
+            }
+
+            Nutcracker.Comment();
+            Nutcracker.IsDisturbed = true;
+
+            Splashes.Destroy();
+
         }
 
         public class Dophin
@@ -64,11 +86,10 @@
 
             public void MakeFontain()
             {
-                RaiseHead();
                 SpoutWater();
             }
 
-            private void RaiseHead() { }
+            public void RaiseHead() { }
 
             private void SpoutWater() { }
 
@@ -87,12 +108,9 @@
                 get { return dophins; }
             }
 
-            public static void AddDophins(uint count, string dolphinScale)
+            public static void AddDophin(string dolphinScale)
             {
-                for (int i = 0; i < count; i++)
-                {
-                    dophins.Add(new Dophin(dolphinScale));
-                }
+                dophins.Add(new Dophin(dolphinScale));
             }
         }
 
@@ -139,6 +157,11 @@
             {
                 Console.WriteLine("Послушайте, скорее, скорее! — навстречу хорошенькой фее! Мушки жужжите! Рыбки плывите! Лебеди песенки пойте! Волны кружитесь, играйте! — Птички над нами летайте! Динь - дин - дон! Динь - динь - дон!");
             }
+
+            public static void Create()
+            {
+                IsCreated = true;
+            }
         }
 
         public class Moor
@@ -156,7 +179,7 @@
             public static List<Moor> Escort { get; set; }
         }
 
-        public static class Nutcraker
+        public static class Nutcracker
         {
 
         }
